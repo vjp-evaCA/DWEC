@@ -1,86 +1,90 @@
-// Clase padre
+// Clase padre CicloMotor
 class CicloMotor {
     // Constructor que inicializa los atributos
     constructor(marca, aceleracion, desaceleracion) {
         this.numRuedas = 2;                    // Todos los ciclomotores tienen 2 ruedas
-        this.velocidadMaxima = 120;            // Velocidad máxima por defecto
-        this.velocidadActual = 0;              // Velocidad inicial en 0
-        this.marca = marca;                    // Marca del ciclomotor
-        this.aceleracion = aceleracion;        // Cuánto acelera por cada impulso
-        this.desaceleracion = desaceleracion;  // Cuánto frena por cada impulso
+        this.velocidadMaxima = 120;            // Velocidad máxima por defecto 120 km/h
+        this.velocidadActual = 0;              // Velocidad inicial en 0 km/h
+        this.marca = marca;                    
+        this.aceleracion = aceleracion;         
+        this.desaceleracion = desaceleracion;  
         this.encendida = false;                // Estado del motor (apagada inicialmente)
     }
 
     // Método para arrancar el ciclomotor
     arrancar() {
-        this.encendida = true;
-        console.log("Se mete y gira la llave, la moto arranca.");
+        this.encendida = true; // Cambia el estado a encendido
+        console.log("Se introduce la llave y se gira, la moto arranca.");
     }
 
     // Método para aumentar la velocidad actual
     acelerar() {
+        // Solo se puede acelerar si la moto está encendida
         if (this.encendida) {
             this.velocidadActual = this.velocidadActual + this.aceleracion;
 
             // Control para no superar la velocidad máxima
             if (this.velocidadActual > this.velocidadMaxima) {
-                this.velocidadActual = this.velocidadMaxima;
+                this.velocidadActual = this.velocidadMaxima; // Limita a velocidad máxima
             }
-            console.log("Acelerando... Velocidad actual: " + this.velocidadActual + " km/h");
-        } else {
-            console.log("No se puede acelerar, la moto está apagada.");
         }
+        // Si está apagada, no hace nada
     }
 
     // Método para reducir la velocidad actual
     frenar() {
+        // Solo se puede frenar si la moto está encendida
         if (this.encendida) {
             this.velocidadActual = this.velocidadActual - this.desaceleracion;
 
             // Control para que la velocidad no sea negativa
             if (this.velocidadActual < 0) {
-                this.velocidadActual = 0;
+                this.velocidadActual = 0; // La velocidad mínima es 0 km/h
             }
-            console.log("Frenando... Velocidad actual: " + this.velocidadActual + " km/h");
         }
     }
 
-    // Método que devuelve toda la información del ciclomotor
+    // Método que muestra toda la información del ciclomotor en formato específico
     mostrarInfo() {
-        return "Marca: " + this.marca +
-            "\nVelocidad máxima: " + this.velocidadMaxima + " km/h" +
-            "\nVelocidad actual: " + this.velocidadActual + " km/h" +
-            "\nNúmero de ruedas: " + this.numRuedas +
-            "\nAceleración: " + this.aceleracion + " km/h" +
-            "\nDesaceleración: " + this.desaceleracion + " km/h" +
-            "\nEncendida: " + (this.encendida ? "Sí" : "No");
+        console.log("..... " + this.marca + " ....");        
+        console.log("Número de ruedas: " + this.numRuedas);  // Muestra número de ruedas
+        console.log("Velocidad máxima: " + this.velocidadMaxima); // Velocidad máxima permitida
+        console.log("Velocidad actual: " + this.velocidadActual); // Velocidad en este momento
+        console.log("Aceleración: " + this.aceleracion);     // Valor de aceleración
+        console.log("Desaceleración: " + this.desaceleracion); // Valor de frenado
+        console.log("Encendida: " + (this.encendida ? "Sí" : "No")); // Estado encendido/apagado
     }
 }
 
-// PRUEBAS DE CICLOMOTOR
-console.log("=== PRUEBA DEL CICLOMOTOR ===");
+// ========== PRUEBAS DEL CICLOMOTOR ==========
 
+// Crear una instancia de CicloMotor
 let ciclomotor = new CicloMotor("Kawasaki", 70, 20);
 
-console.log("LA MOTO INICIALMENTE");
-console.log(ciclomotor.mostrarInfo());
+// PRIMERA PRUEBA: Estado inicial de la moto
+console.log("LA MOTO INICIALMENTE:");
+ciclomotor.mostrarInfo(); 
 
+// SEGUNDA PRUEBA: Intentar acelerar con la moto apagada
 console.log("\nLA MOTO TRAS ACELERAR:");
-ciclomotor.acelerar();
-console.log(ciclomotor.mostrarInfo());
+ciclomotor.acelerar(); 
+ciclomotor.mostrarInfo(); 
 
+// TERCERA PRUEBA: Arrancar y acelerar una vez
 console.log("\nLA MOTO TRAS ARRANCARLA Y ACELERAR:");
-ciclomotor.arrancar();
-ciclomotor.acelerar();
-console.log(ciclomotor.mostrarInfo());
+ciclomotor.arrancar(); 
+ciclomotor.acelerar(); 
+ciclomotor.mostrarInfo(); 
 
+// CUARTA PRUEBA: Acelerar por segunda vez
 console.log("\nVOLVEMOS A ACELERAR:");
 ciclomotor.acelerar(); 
-console.log(ciclomotor.mostrarInfo());
+ciclomotor.mostrarInfo(); 
 
+// QUINTA PRUEBA: Frenar la moto
 console.log("\nFRENAMOS LA MOTO:");
 ciclomotor.frenar();
-console.log(ciclomotor.mostrarInfo());
+ciclomotor.mostrarInfo(); 
 
 // Clase hija
 class MotoCross extends CicloMotor {
@@ -127,103 +131,100 @@ class MotoCross extends CicloMotor {
 
     // Muestra la información de MotoCross
     mostrarInfo() {
-        return "MotoCross - " + 
-               "Marca: " + this.marca +
-               "\nVelocidad máxima: " + this.velocidadMaxima + " km/h" +
-               "\nVelocidad actual: " + this.velocidadActual + " km/h" +
-               "\nMarcha actual: " + this.marchaActual +
-               "\nNúmero de ruedas: " + this.numRuedas +
-               "\nAceleración: " + this.aceleracion + " km/h" +
-               "\nDesaceleración: " + this.desaceleracion + " km/h" +
-               "\nEncendida: " + (this.encendida ? "Sí" : "No");
-    }
+    console.log("..... " + this.marca + " ....");
+    console.log("Número de ruedas: " + this.numRuedas);
+    console.log("Velocidad máxima: " + this.velocidadMaxima);
+    console.log("Velocidad actual: " + this.velocidadActual);
+    console.log("Aceleración: " + this.aceleracion);
+    console.log("Desaceleración: " + this.desaceleracion);
+    console.log("Encendida: " + (this.encendida ? "Sí" : "No"));
+    console.log("Marcha: " + this.marchaActual); // Añadir esta línea
+}
 }
 
 // PRUEBAS DE MOTOCROSS
-console.log("\n\n=== PRUEBA DE MOTOCROSS ===");
+console.log("\n\nPruebas de la moto de motocross\n\n");
 
-let motoCross = new MotoCross("Yamaha", 25, 15);
+let motoMotoCross = new Motocross("Honda", 10, 5);
 
-console.log("MOTO DE MOTOCROSS INICIALMENTE");
-console.log(motoCross.mostrarInfo());
+// PRIMERA PRUEBA: Estado inicial de la moto de motocross
+console.log("LA MOTO DE MOTOCROSS INICIALMENTE:");
+motoMotoCross.mostrarInfo(); 
 
-console.log("\nINTENTAMOS ACELERAR SIN ARRANCAR:");
-motoCross.acelerar();
+// SEGUNDA PRUEBA: Intentar acelerar con la moto apagada
+console.log("LA MOTO TRAS ACELERAR:");
+motoMotoCross.acelerar();
+motoMotoCross.mostrarInfo(); 
 
-console.log("\nARRANCAMOS LA MOTO:");
-motoCross.arrancar();
+// TERCERA PRUEBA: Arrancar y acelerar una vez
+console.log("LA MOTO TRAS ARRANCARLA Y ACELERAR:");
+motoMotoCross.arrancar(); 
+motoMotoCross.acelerar(); 
+motoMotoCross.mostrarInfo();
 
-console.log("\nACELERAMOS POR PRIMERA VEZ:");
-motoCross.acelerar();
-console.log(motoCross.mostrarInfo());
+// CUARTA PRUEBA: Acelerar por segunda vez
+console.log("VOLVEMOS A ACELERAR:");
+motoMotoCross.acelerar(); 
+motoMotoCross.mostrarInfo(); 
 
-console.log("\nACELERAMOS POR SEGUNDA VEZ:");
-motoCross.acelerar();
-console.log(motoCross.mostrarInfo());
+// QUINTA PRUEBA: Frenar la moto
+console.log("FRENAMOS LA MOTO:");
+motoMotoCross.frenar(); 
+motoMotoCross.mostrarInfo(); 
 
-console.log("\nACELERAMOS POR TERCERA VEZ:");
-motoCross.acelerar();
-console.log(motoCross.mostrarInfo());
-
-console.log("\nFRENAMOS LA MOTO:");
-motoCross.frenar();
-console.log(motoCross.mostrarInfo());
-
-console.log("\nFRENAMOS HASTA DETENERNOS:");
-motoCross.frenar();
-motoCross.frenar();
-console.log(motoCross.mostrarInfo());
-
-// Clase hija
+// Clase hija Scooter que hereda de CicloMotor
 class Scooter extends CicloMotor {
+    // Constructor que solo recibe la marca
     constructor(marca) {
-        // Scooter siempre tiene aceleración=25 y desaceleración=15
+        // Llama al constructor padre con aceleración fija 25 y desaceleración fija 15
         super(marca, 25, 15);
     }
 
-    // Método arracar de Scooter
+    // Sobrescribe el método arrancar con comportamiento específico de Scooter
     arrancar() {
-        this.encendida = true;
-        console.log("Se acerca la llave y se pulsa el botón, la moto arranca.");
+        this.encendida = true; // Cambia el estado a encendido
+        console.log("Se acerca la llave y se pulsa el botón, la moto arranca");
     }
-
-    // Los métodos acelerar() y frenar() ya vienen listos del padre:
-    // No hace falta cambiarlos, funcionan bien con los valores fijos del constructor.
-
-    // Sobrescribe mostrarInfo
+    
+    // Sobrescribe el método mostrarInfo para cambiar el formato visual
     mostrarInfo() {
-        return "Scooter - " + 
-               "Marca: " + this.marca +
-               "\nVelocidad máxima: " + this.velocidadMaxima + " km/h" +
-               "\nVelocidad actual: " + this.velocidadActual + " km/h" +
-               "\nNúmero de ruedas: " + this.numRuedas +
-               "\nAceleración: " + this.aceleracion + " km/h (fija)" +
-               "\nDesaceleración: " + this.desaceleracion + " km/h (fija)" +
-               "\nEncendida: " + (this.encendida ? "Sí" : "No");
+        console.log("--- " + this.marca + " ---");
+        console.log("Número de ruedas: " + this.numRuedas);
+        console.log("Velocidad máxima: " + this.velocidadMaxima);
+        console.log("Velocidad actual: " + this.velocidadActual);
+        console.log("Aceleración: " + this.aceleracion);
+        console.log("Desaceleración: " + this.desaceleracion);
+        console.log("Encendida: " + (this.encendida ? "Sí" : "No"));
     }
 }
 
 // PRUEBAS DE SCOOTER
-console.log("\n\n=== PRUEBA DE LA SCOOTER ===");
+console.log("\n\nPruebas de la scooter\n\n");
 
+// Crear una instancia de Scooter con marca "Yamaha"
 let scooter = new Scooter("Yamaha");
 
-console.log("MOTO SCOOTER INICIALMENTE");
-console.log(scooter.mostrarInfo());
+// PRIMERA PRUEBA: Estado inicial de la scooter
+console.log("LA MOTO SCOOTER INICIALMENTE:");
+scooter.mostrarInfo();
 
-console.log("\nLA MOTO TRAS ACELERAR:");
+// SEGUNDA PRUEBA: Intentar acelerar con la scooter apagada
+console.log("LA MOTO TRAS ACELERAR:");
 scooter.acelerar();
-console.log(scooter.mostrarInfo());
+scooter.mostrarInfo(); 
 
-console.log("\nLA MOTO TRAS ARRANCAR Y ACELERAR:");
-scooter.arrancar();
-scooter.acelerar();
-console.log(scooter.mostrarInfo());
+// TERCERA PRUEBA: Arrancar y acelerar una vez
+console.log("LA MOTO TRAS ARRANCARLA Y ACELERAR:");
+scooter.arrancar(); 
+scooter.acelerar(); 
+scooter.mostrarInfo();
 
-console.log("\nVOLVEMOS A ACELERAR:");
-scooter.acelerar();
-console.log(scooter.mostrarInfo());
+// CUARTA PRUEBA: Acelerar por segunda vez
+console.log("VOLVEMOS A ACELERAR:");
+scooter.acelerar(); 
+scooter.mostrarInfo(); 
 
-console.log("\nFRENAMOS LA MOTO:");
-scooter.frenar();
-console.log(scooter.mostrarInfo());
+// QUINTA PRUEBA: Frenar la scooter
+console.log("FRENAMOS LA MOTO:");
+scooter.frenar(); 
+scooter.mostrarInfo(); 
