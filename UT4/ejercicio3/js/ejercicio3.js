@@ -57,6 +57,7 @@ class CicloMotor {
 }
 
 // ========== PRUEBAS DEL CICLOMOTOR ==========
+console.log("\n\nPruebas del ciclomotor\n\n");
 
 // Crear una instancia de CicloMotor
 let ciclomotor = new CicloMotor("Kawasaki", 70, 20);
@@ -145,7 +146,7 @@ class MotoCross extends CicloMotor {
 // PRUEBAS DE MOTOCROSS
 console.log("\n\nPruebas de la moto de motocross\n\n");
 
-let motoMotoCross = new Motocross("Honda", 10, 5);
+let motoMotoCross = new MotoCross("Honda", 10, 5);
 
 // PRIMERA PRUEBA: Estado inicial de la moto de motocross
 console.log("LA MOTO DE MOTOCROSS INICIALMENTE:");
