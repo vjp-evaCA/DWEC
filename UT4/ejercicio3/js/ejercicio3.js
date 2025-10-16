@@ -1,24 +1,28 @@
+// Clase padre
 class CicloMotor {
-    // Atributos en constructor
+    // Constructor que inicializa los atributos
     constructor(marca, aceleracion, desaceleracion) {
-        this.numRuedas = 2;
-        this.velocidadMaxima = 120;
-        this.velocidadActual = 0;
-        this.marca = marca;
-        this.aceleracion = aceleracion;
-        this.desaceleracion = desaceleracion;
-        this.encendida = false;
+        this.numRuedas = 2;                    // Todos los ciclomotores tienen 2 ruedas
+        this.velocidadMaxima = 120;            // Velocidad máxima por defecto
+        this.velocidadActual = 0;              // Velocidad inicial en 0
+        this.marca = marca;                    // Marca del ciclomotor
+        this.aceleracion = aceleracion;        // Cuánto acelera por cada impulso
+        this.desaceleracion = desaceleracion;  // Cuánto frena por cada impulso
+        this.encendida = false;                // Estado del motor (apagada inicialmente)
     }
 
-    // Métodos
+    // Método para arrancar el ciclomotor
     arrancar() {
         this.encendida = true;
         console.log("Se mete y gira la llave, la moto arranca.");
     }
 
+    // Método para aumentar la velocidad actual
     acelerar() {
         if (this.encendida) {
             this.velocidadActual = this.velocidadActual + this.aceleracion;
+
+            // Control para no superar la velocidad máxima
             if (this.velocidadActual > this.velocidadMaxima) {
                 this.velocidadActual = this.velocidadMaxima;
             }
@@ -28,9 +32,12 @@ class CicloMotor {
         }
     }
 
+    // Método para reducir la velocidad actual
     frenar() {
         if (this.encendida) {
             this.velocidadActual = this.velocidadActual - this.desaceleracion;
+
+            // Control para que la velocidad no sea negativa
             if (this.velocidadActual < 0) {
                 this.velocidadActual = 0;
             }
@@ -38,6 +45,7 @@ class CicloMotor {
         }
     }
 
+    // Método que devuelve toda la información del ciclomotor
     mostrarInfo() {
         return "Marca: " + this.marca +
             "\nVelocidad máxima: " + this.velocidadMaxima + " km/h" +
@@ -58,7 +66,7 @@ console.log("LA MOTO INICIALMENTE");
 console.log(ciclomotor.mostrarInfo());
 
 console.log("\nLA MOTO TRAS ACELERAR:");
-ciclomotor.acelerar(); // No se puede acelerar una moto apagada
+ciclomotor.acelerar();
 console.log(ciclomotor.mostrarInfo());
 
 console.log("\nLA MOTO TRAS ARRANCARLA Y ACELERAR:");
@@ -67,38 +75,42 @@ ciclomotor.acelerar();
 console.log(ciclomotor.mostrarInfo());
 
 console.log("\nVOLVEMOS A ACELERAR:");
-ciclomotor.acelerar(); // No podrá pasar de 120km/h
+ciclomotor.acelerar(); 
 console.log(ciclomotor.mostrarInfo());
 
 console.log("\nFRENAMOS LA MOTO:");
 ciclomotor.frenar();
 console.log(ciclomotor.mostrarInfo());
 
+// Clase hija
 class MotoCross extends CicloMotor {
-    // Atributos en constructor
+    // Constructor que llama al padre y establece valores
     constructor(marca, aceleracion, desaceleracion) {
         super(marca, aceleracion, desaceleracion);
         this.velocidadMaxima = 90; // Velocidad máxima específica para Motocross
-        this.marchaActual = 0; // Atributo adicional para Motocross
+        this.marchaActual = 0;     
     }
 
+    // Sobrescribe el método arrancar con comportamiento específico de MotoCross
     arrancar() {
         console.log("Se levanta la pata de cabra");
-        super.arrancar(); // Llama al método arrancar del padre
+        super.arrancar(); 
     }
 
+    // Extiende el método acelerar añadiendo ajuste de marcha
     acelerar() {
-        super.acelerar(); // Llama al método acelerar del padre
-        this.ajustarMarcha(); // Ajusta la marcha después de acelerar
+        super.acelerar(); 
+        this.ajustarMarcha(); 
     }
 
+    // Extiende el método frenar añadiendo ajuste de marcha
     frenar() {
-        super.frenar(); // Llama al método frenar del padre
-        this.ajustarMarcha(); // Ajusta la marcha después de frenar
+        super.frenar(); 
+        this.ajustarMarcha(); 
     }
 
+    // Método específico de MotoCross para ajustar marchas según la velocidad
     ajustarMarcha() {
-        // Ajusta la marcha según la velocidad actual según la tabla proporcionada
         if (this.velocidadActual === 0) {
             this.marchaActual = 0;
         } else if (this.velocidadActual > 0 && this.velocidadActual <= 10) {
@@ -113,6 +125,7 @@ class MotoCross extends CicloMotor {
         console.log("Marcha actual: " + this.marchaActual);
     }
 
+    // Muestra la información de MotoCross
     mostrarInfo() {
         return "MotoCross - " + 
                "Marca: " + this.marca +
@@ -161,25 +174,23 @@ motoCross.frenar();
 motoCross.frenar();
 console.log(motoCross.mostrarInfo());
 
-
+// Clase hija
 class Scooter extends CicloMotor {
     constructor(marca) {
         // Scooter siempre tiene aceleración=25 y desaceleración=15
         super(marca, 25, 15);
-        // No cambiamos velocidadMaxima, mantiene 120 km/h del padre
-        // No necesita atributos adicionales
     }
 
+    // Método arracar de Scooter
     arrancar() {
-        // Sobrescribe completamente el método con el comportamiento específico de Scooter
         this.encendida = true;
         console.log("Se acerca la llave y se pulsa el botón, la moto arranca.");
     }
 
-    // NO necesitamos sobrescribir acelerar() ni frenar()
-    // porque ya heredan el comportamiento del padre y usan
-    // los valores fijos de 25 y 15 que pasamos en el constructor
+    // Los métodos acelerar() y frenar() ya vienen listos del padre:
+    // No hace falta cambiarlos, funcionan bien con los valores fijos del constructor.
 
+    // Sobrescribe mostrarInfo
     mostrarInfo() {
         return "Scooter - " + 
                "Marca: " + this.marca +
@@ -198,21 +209,21 @@ console.log("\n\n=== PRUEBA DE LA SCOOTER ===");
 let scooter = new Scooter("Yamaha");
 
 console.log("MOTO SCOOTER INICIALMENTE");
-console.log(scooter.mostrarInfo()); // ← FALTABA console.log()
+console.log(scooter.mostrarInfo());
 
 console.log("\nLA MOTO TRAS ACELERAR:");
 scooter.acelerar();
-console.log(scooter.mostrarInfo()); // ← FALTABA console.log()
+console.log(scooter.mostrarInfo());
 
 console.log("\nLA MOTO TRAS ARRANCAR Y ACELERAR:");
 scooter.arrancar();
 scooter.acelerar();
-console.log(scooter.mostrarInfo()); // ← FALTABA console.log()
+console.log(scooter.mostrarInfo());
 
 console.log("\nVOLVEMOS A ACELERAR:");
 scooter.acelerar();
-console.log(scooter.mostrarInfo()); // ← FALTABA console.log()
+console.log(scooter.mostrarInfo());
 
 console.log("\nFRENAMOS LA MOTO:");
 scooter.frenar();
-console.log(scooter.mostrarInfo()); // ← FALTABA console.log()
+console.log(scooter.mostrarInfo());
