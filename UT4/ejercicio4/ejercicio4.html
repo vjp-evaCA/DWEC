@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurantes Cáceres</title>
+    <style>
+        h1 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 20px;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #f2f2f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .subtitle {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #ecf0f1;
+        }
+        .restaurante-numero {
+            font-weight: bold;
+            text-align: center;
+            width: 50px;
+        }
+        .btn-cargar {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn-cargar:hover {
+            background-color: #2980b9;
+        }
+        .carta-container {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .carta-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+        .carta-titulo {
+            font-size: 24px;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .btn-cerrar {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .carta-seccion {
+            margin-bottom: 25px;
+        }
+        .carta-seccion h3 {
+            color: #3498db;
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        .plato {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+        .plato-nombre {
+            font-weight: bold;
+        }
+        .plato-precio {
+            color: #e74c3c;
+        }
+        .plato-descripcion {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 3px;
+        }
+        .restaurante-seleccionado {
+            background-color: #e8f4fc !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Restaurantes Cáceres</h1>
+        <p class="subtitle">Cargus Restaurantes</p>
+    </div>
+    
+    <table id="tabla-restaurantes">
+        <thead>
+            <tr>
+                <th>Restaurante</th>
+                <th>Nombre</th>
+                <th>Web</th>
+                <th>Dirección</th>
+                <th>Máximo aforo</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="restaurante-numero">1</td>
+                <td>Aralia</td>
+                <td>http://www.aralia.es</td>
+                <td>Carretera N-630, Km. 550, Cáceres</td>
+                <td>800 pax</td>
+                <td><button class="btn-cargar" data-restaurante="Aralia">Cargar Restaurante</button></td>
+            </tr>
+            <tr>
+                <td class="restaurante-numero">2</td>
+                <td>Atrio</td>
+                <td>http://www.restauranteatrio.com</td>
+                <td>Plaza de San Mateo, 1, Cáceres</td>
+                <td>60 pax</td>
+                <td><button class="btn-cargar" data-restaurante="Atrio">Cargar Restaurante</button></td>
+            </tr>
+            <tr>
+                <td class="restaurante-numero">3</td>
+                <td>Big House</td>
+                <td>http://www.bighousecaceres.com</td>
+                <td>Calle Juan Solano Pedrero, 14, Cáceres</td>
+                <td>80 pax</td>
+                <td><button class="btn-cargar" data-restaurante="Big House">Cargar Restaurante</button></td>
+            </tr>
+            <tr>
+                <td class="restaurante-numero">4</td>
+                <td>Big House II</td>
+                <td>http://www.bighousecaceres.com</td>
+                <td>Avenida Ruta de la Plata, 46, Cáceres</td>
+                <td>110 pax</td>
+                <td><button class="btn-cargar" data-restaurante="Big House II">Cargar Restaurante</button></td>
+            </tr>
+            <tr>
+                <td class="restaurante-numero">5</td>
+                <td>Botein</td>
+                <td>http://www.botein.es</td>
+                <td>Calle Madre Isabel de Larrañaga, s/n, Cáceres</td>
+                <td>60 pax</td>
+                <td><button class="btn-cargar" data-restaurante="Botein">Cargar Restaurante</button></td>
+            </tr>
+            <tr>
+                <td class="restaurante-numero">6</td>
+                <td>Cámping Cáceres</td>
+                <td>http://www.campingcaceres.com</td>
+                <td>Carretera N-630, Km. 549,5, Cáceres</td>
+                <td>215 pax</td>
+                <td><button class="btn-cargar" data-restaurante="Cámping Cáceres">Cargar Restaurante</button></td>
+            </tr>
+            <tr>
+                <td class="restaurante-numero">7</td>
+                <td>Casa Mijhaeli</td>
+                <td>http://www.casamijhaeli.es/</td>
+                <td>Calle Barrionuevo, 6, Cáceres</td>
+                <td>36 pax</td>
+                <td><button class="btn-cargar" data-restaurante="Casa Mijhaeli">Cargar Restaurante</button></td>
+            </tr>
+            <tr>
+                <td class="restaurante-numero">8</td>
+                <td>Castillo de las Arguijuelas</td>
+                <td>http://www.castillodelaarguijuela.com</td>
+                <td>Carretera de Mérida, s/n, Cáceres</td>
+                <td>1400 pax</td>
+                <td><button class="btn-cargar" data-restaurante="Castillo de las Arguijuelas">Cargar Restaurante</button></td>
+            </tr>
+            <tr>
+                <td class="restaurante-numero">9</td>
+                <td>Cayena</td>
+                <td>http://www.restaurantecayena.com</td>
+                <td>Plaza mayor, 9, Cáceres</td>
+                <td>130 pax</td>
+                <td><button class="btn-cargar" data-restaurante="Cayena">Cargar Restaurante</button></td>
+            </tr>
+            <tr>
+                <td class="restaurante-numero">10</td>
+                <td>Cortijo Real</td>
+                <td>http://www.restaurantecortijoreal.com</td>
+                <td>Carretera de Medellín, 0 Km. 3,5, Cáceres</td>
+                <td>600 pax</td>
+                <td><button class="btn-cargar" data-restaurante="Cortijo Real">Cargar Restaurante</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="carta-container" class="carta-container">
+        <div class="carta-header">
+            <h2 id="carta-titulo" class="carta-titulo">Carta del Restaurante</h2>
+            <button id="btn-cerrar" class="btn-cerrar">Cerrar Carta</button>
+        </div>
+        
+        <div id="carta-contenido">
+            <!-- El contenido de la carta se cargará aquí dinámicamente -->
+        </div>
+    </div>
+
+    <script>
+        // Datos de ejemplo para las cartas de los restaurantes
+        const cartasRestaurantes = {
+            "Aralia": {
+                "Entrantes": [
+                    {"nombre": "Tabla de ibéricos", "precio": "18€", "descripcion": "Selección de jamón ibérico, lomo y salchichón"},
+                    {"nombre": "Queso de la Serena", "precio": "12€", "descripcion": "Queso de oveja con miel de la comarca"}
+                ],
+                "Platos principales": [
+                    {"nombre": "Cordero asado", "precio": "24€", "descripcion": "Pierna de cordero lechal al horno de leña"},
+                    {"nombre": "Cachuela extremeña", "precio": "16€", "descripcion": "Guiso tradicional de cerdo ibérico"}
+                ],
+                "Postres": [
+                    {"nombre": "Técula Mécula", "precio": "7€", "descripcion": "Postre tradicional de almendra y yema"},
+                    {"nombre": "Natillas caseras", "precio": "5€", "descripcion": "Con galleta y canela"}
+                ]
+            },
+            "Atrio": {
+                "Entrantes": [
+                    {"nombre": "Foie micuit", "precio": "22€", "descripcion": "Con reducción de Pedro Ximénez"},
+                    {"nombre": "Tartar de atún rojo", "precio": "19€", "descripcion": "Con aguacate y chips de batata"}
+                ],
+                "Platos principales": [
+                    {"nombre": "Solomillo de ternera", "precio": "28€", "descripcion": "Con puré de patata trufado"},
+                    {"nombre": "Risotto de boletus", "precio": "18€", "descripcion": "Con parmesano y trufa"}
+                ],
+                "Postres": [
+                    {"nombre": "Soufflé de chocolate", "precio": "9€", "descripcion": "Con helado de vainilla"},
+                    {"nombre": "Coulant de queso", "precio": "8€", "descripcion": "Con compota de frutos rojos"}
+                ]
+            },
+            "Big House": {
+                "Entrantes": [
+                    {"nombre": "Alitas de pollo", "precio": "8€", "descripcion": "Con salsa barbacoa o picante"},
+                    {"nombre": "Nachos con queso", "precio": "10€", "descripcion": "Con guacamole y sour cream"}
+                ],
+                "Platos principales": [
+                    {"nombre": "Hamburguesa Big House", "precio": "14€", "descripcion": "Doble carne, bacon y queso cheddar"},
+                    {"nombre": "Costillas BBQ", "precio": "16€", "descripcion": "Estilo americano con patatas fritas"}
+                ],
+                "Postres": [
+                    {"nombre": "Brownie con helado", "precio": "6€", "descripcion": "Caliente con nueces y sirope de chocolate"},
+                    {"nombre": "Tarta de queso", "precio": "5€", "descripcion": "Estilo Nueva York con frutos rojos"}
+                ]
+            },
+            "Botein": {
+                "Entrantes": [
+                    {"nombre": "Ensalada Botein", "precio": "12€", "descripcion": "Lechugas variadas, queso de cabra y frutos secos"},
+                    {"nombre": "Croquetas caseras", "precio": "9€", "descripcion": "De jamón ibérico y espinacas"}
+                ],
+                "Platos principales": [
+                    {"nombre": "Lubina a la sal", "precio": "20€", "descripcion": "Con verduras asadas y patatas"},
+                    {"nombre": "Carrillera ibérica", "precio": "18€", "descripcion": "Estofada con puré de patata"}
+                ],
+                "Postres": [
+                    {"nombre": "Torrijas", "precio": "6€", "descripcion": "Con helado de vainilla"},
+                    {"nombre": "Mousse de chocolate", "precio": "5€", "descripcion": "Con virutas de chocolate blanco"}
+                ]
+            },
+            "Cámping Cáceres": {
+                "Entrantes": [
+                    {"nombre": "Ensalada mixta", "precio": "8€", "descripcion": "Lechuga, tomate, atún, maíz y huevo"},
+                    {"nombre": "Sopa del día", "precio": "6€", "descripcion": "Consulta nuestras opciones"}
+                ],
+                "Platos principales": [
+                    {"nombre": "Pizza margarita", "precio": "10€", "descripcion": "Tomate, mozzarella y albahaca"},
+                    {"nombre": "Pasta carbonara", "precio": "12€", "descripcion": "Con bacon, nata y parmesano"}
+                ],
+                "Postres": [
+                    {"nombre": "Flan de huevo", "precio": "4€", "descripcion": "Casero con nata"},
+                    {"nombre": "Helado", "precio": "4€", "descripcion": "Chocolate, vainilla o fresa"}
+                ]
+            }
+        };
+
+        // Añadir eventos a los botones
+        document.addEventListener('DOMContentLoaded', function() {
+            const botonesCargar = document.querySelectorAll('.btn-cargar');
+            const cartaContainer = document.getElementById('carta-container');
+            const cartaTitulo = document.getElementById('carta-titulo');
+            const cartaContenido = document.getElementById('carta-contenido');
+            const btnCerrar = document.getElementById('btn-cerrar');
+            
+            botonesCargar.forEach(boton => {
+                boton.addEventListener('click', function() {
+                    const restaurante = this.getAttribute('data-restaurante');
+                    
+                    // Remover clase de selección anterior
+                    document.querySelectorAll('tr').forEach(fila => {
+                        fila.classList.remove('restaurante-seleccionado');
+                    });
+                    
+                    // Añadir clase de selección a la fila actual
+                    this.closest('tr').classList.add('restaurante-seleccionado');
+                    
+                    // Mostrar la carta del restaurante
+                    mostrarCarta(restaurante);
+                });
+            });
+            
+            btnCerrar.addEventListener('click', function() {
+                cartaContainer.style.display = 'none';
+            });
+            
+            function mostrarCarta(nombreRestaurante) {
+                cartaTitulo.textContent = `Carta de ${nombreRestaurante}`;
+                cartaContenido.innerHTML = '';
+                
+                if (cartasRestaurantes[nombreRestaurante]) {
+                    const carta = cartasRestaurantes[nombreRestaurante];
+                    
+                    for (const seccion in carta) {
+                        const divSeccion = document.createElement('div');
+                        divSeccion.className = 'carta-seccion';
+                        
+                        const tituloSeccion = document.createElement('h3');
+                        tituloSeccion.textContent = seccion;
+                        divSeccion.appendChild(tituloSeccion);
+                        
+                        carta[seccion].forEach(plato => {
+                            const divPlato = document.createElement('div');
+                            divPlato.className = 'plato';
+                            
+                            const divInfo = document.createElement('div');
+                            
+                            const nombrePlato = document.createElement('div');
+                            nombrePlato.className = 'plato-nombre';
+                            nombrePlato.textContent = plato.nombre;
+                            divInfo.appendChild(nombrePlato);
+                            
+                            if (plato.descripcion) {
+                                const descripcionPlato = document.createElement('div');
+                                descripcionPlato.className = 'plato-descripcion';
+                                descripcionPlato.textContent = plato.descripcion;
+                                divInfo.appendChild(descripcionPlato);
+                            }
+                            
+                            divPlato.appendChild(divInfo);
+                            
+                            const precioPlato = document.createElement('div');
+                            precioPlato.className = 'plato-precio';
+                            precioPlato.textContent = plato.precio;
+                            divPlato.appendChild(precioPlato);
+                            
+                            divSeccion.appendChild(divPlato);
+                        });
+                        
+                        cartaContenido.appendChild(divSeccion);
+                    }
+                } else {
+                    cartaContenido.innerHTML = '<p>La carta de este restaurante no está disponible en este momento.</p>';
+                }
+                
+                cartaContainer.style.display = 'block';
+                
+                // Desplazar la vista hacia la carta
+                cartaContainer.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>
