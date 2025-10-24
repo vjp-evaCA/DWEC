@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Tareas</title>
+    <link rel="stylesheet" href="css/ejercicio2.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Consultar Tareas</h1>
+            <p class="description">Visualiza y gestiona todas las tareas disponibles en el sistema</p>
+        </header>
+
+        <div class="controls">
+            <div class="search-box">
+                <i>🔍</i>
+                <input type="text" id="searchInput" placeholder="Buscar tareas...">
+            </div>
+
+            <button class="refresh-btn" id="refreshBtn">
+                <span>🔄</span> Actualizar
+            </button>
+        </div>
+
+        <div class="tasks-container" id="tasksContainer">
+            <!-- Las tareas se cargarán aquí -->
+        </div>
+
+        <div id="loadingMessage" class="loading">
+            <div class="spinner"></div>
+            <p>Cargando tareas...</p>
+        </div>
+
+        <div id="errorMessage" class="error" style="display: none;">
+            <p>Error al cargar las tareas. Verifica que el servidor esté ejecutándose en localhost:3000</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Puedes ver las tareas de ejemplo haciendo clic en el botón
+                "Mostrar Datos de Ejemplo"</p>
+            <button id="showExampleBtn"
+                style="margin-top: 15px; padding: 8px 15px; background-color: var(--primary-color); color: white; border: none; border-radius: var(--border-radius); cursor: pointer;">
+                Mostrar Datos de Ejemplo
+            </button>
+        </div>
+
+        <div id="noResultsMessage" class="no-results" style="display: none;">
+            <p>No se encontraron tareas que coincidan con los criterios de búsqueda.</p>
+        </div>
+    </div>
+</body>
+
+</html>
