@@ -1,0 +1,100 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #000000;
+    line-height: 1.4;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Encabezado */
+header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #000;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+/* Contenedor de entradas */
+.entradas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Estilo de cada entrada */
+.entrada {
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
+/* Título con fondo negro y letras blancas */
+.titulo-post {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 15px 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Contenido con fondo amarillo claro */
+.contenido-post {
+    background-color: #fffacd;
+    padding: 15px 20px;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Botones */
+.botones {
+    padding: 15px 20px;
+}
+
+button {
+    background-color: #d3d3d3;
+    border: 1px solid #000;
+    color: #000000;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Secciones ocultas */
+.oculto {
+    display: none;
+}
+
+/* Usuario y comentarios con fondo amarillo claro */
+.usuario, .comentarios {
+    padding: 15px 20px;
+    background-color: #fffacd;
+    border-top: 1px solid #ddd;
+}
+
+.usuario p, .comentarios p {
+    margin-bottom: 10px;
+}
+
+.lista-comentarios p {
+    margin-bottom: 8px;
+}
