@@ -1,0 +1,17 @@
+{
+  "name": "ut5-npm-http-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lanzarserver": "http-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^9.38.0",
+    "http-server": "^14.1.1"
+  }
+}
