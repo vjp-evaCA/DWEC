@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tareas</title>
+    <link rel="stylesheet" href="css/ejercicio4.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gestión de Tareas</h1>
+            <p class="description">Visualiza, modifica y elimina tareas del sistema</p>
+            <div class="header-actions">
+                <button id="newTaskBtn" class="btn btn-primary">
+                    <span>➕</span> Nueva Tarea
+                </button>
+                <button id="toggleDeleteBtn" class="btn btn-danger">
+                    <span>🗑️</span> Modo Eliminar
+                </button>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="search-box">
+                <i>🔍</i>
+                <input type="text" id="searchInput" placeholder="Buscar tareas...">
+            </div>
+            <button class="refresh-btn" id="refreshBtn">
+                <span>🔄</span> Actualizar
+            </button>
+        </div>
+
+        <!-- Modal para Editar Tarea -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Editar Tarea</h2>
+                    <button class="close-btn" id="closeEditModal">&times;</button>
+                </div>
+                <form id="editTaskForm" class="task-form">
+                    <input type="hidden" id="editTaskId">
+                    
+                    <div class="form-group">
+                        <label for="editTitle" class="form-label">Título *</label>
+                        <input 
+                            type="text" 
+                            id="editTitle" 
+                            class="form-input"
+                            placeholder="Ingresa el título de la tarea"
+                            required
+                            minlength="3"
+                        >
+                        <span class="error-message" id="editTitleError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editDescription" class="form-label">Descripción *</label>
+                        <textarea 
+                            id="editDescription" 
+                            class="form-textarea"
+                            placeholder="Describe los detalles de la tarea..."
+                            rows="5"
+                            required
+                            minlength="10"
+                        ></textarea>
+                        <span class="error-message" id="editDescriptionError"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editEstado" class="form-label">Estado</label>
+                            <select id="editEstado" class="form-select">
+                                <option value="pendiente">Pendiente</option>
+                                <option value="haciendo">Haciendo</option>
+                                <option value="completada">Completada</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editPriority" class="form-label">Prioridad</label>
+                            <select id="editPriority" class="form-select">
+                                <option value="baja">Baja</option>
+                                <option value="media">Media</option>
+                                <option value="alta">Alta</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editDueDate" class="form-label">Fecha Límite</label>
+                        <input 
+                            type="datetime-local" 
+                            id="editDueDate" 
+                            class="form-input"
+                        >
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="cancelEditBtn" class="btn btn-secondary">
+                            Cancelar
+                        </button>
+                        <button type="submit" id="updateTaskBtn" class="btn btn-primary">
+                            <span id="updateText">Actualizar Tarea</span>
+                            <div id="updateSpinner" class="spinner" style="display: none;"></div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal de Confirmación para Eliminar -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content delete-modal">
+                <div class="modal-header">
+                    <h2>Confirmar Eliminación</h2>
+                    <button class="close-btn" id="closeDeleteModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que quieres eliminar la tarea <strong id="deleteTaskTitle"></strong>?</p>
+                    <p class="warning-text">Esta acción no se puede deshacer.</p>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="cancelDeleteBtn" class="btn btn-secondary">
+                        Cancelar
+                    </button>
+                    <button type="button" id="confirmDeleteBtn" class="btn btn-danger">
+                        <span id="deleteText">Eliminar Tarea</span>
+                        <div id="deleteSpinner" class="spinner" style="display: none;"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor de Tareas -->
+        <div class="tasks-container" id="tasksContainer">
+            <!-- Las tareas se cargarán aquí dinámicamente -->
+        </div>
+
+        <!-- Estados de la aplicación -->
+        <div id="loadingMessage" class="loading">
+            <div class="spinner"></div>
+            <p>Cargando tareas...</p>
+        </div>
+
+        <div id="errorMessage" class="error" style="display: none;">
+            <p>Error al cargar las tareas. Verifica que el servidor esté ejecutándose en localhost:3000</p>
+            <button id="showExampleBtn" class="btn btn-secondary">
+                Mostrar Datos de Ejemplo
+            </button>
+        </div>
+
+        <div id="noResultsMessage" class="no-results" style="display: none;">
+            <p>No se encontraron tareas que coincidan con los criterios de búsqueda.</p>
+        </div>
+
+        <div id="noTasksMessage" class="no-results" style="display: none;">
+            <p>No hay tareas disponibles. ¡Crea tu primera tarea!</p>
+            <button id="createFirstTaskBtn" class="btn btn-primary">
+                Crear Primera Tarea
+            </button>
+        </div>
+    </div>
+
+    <script src="js/gestion-tareas.js"></script>
+</body>
+</html>
