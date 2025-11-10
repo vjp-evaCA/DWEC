@@ -32,6 +32,17 @@
             opacity: 0.9;
         }
 
+        /* Botones grandes del hero */
+        .btn-large {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            margin: 0 10px;
+        }
+
+        .hero-actions {
+            margin-top: 30px;
+        }
+
         /* Grid de tarjetas de acción */
         .action-cards {
             display: grid;
@@ -73,6 +84,53 @@
             color: #666;
             margin-bottom: 20px;
         }
+
+        /* Botón outline */
+        .btn-outline {
+            background-color: transparent;
+            color: #4a6fa5;
+            border: 2px solid #4a6fa5;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            background-color: #4a6fa5;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Estilo específico para la tarjeta de eliminar */
+        .delete-card {
+            border-color: #dc3545; /* Borde rojo sutil */
+        }
+
+        .delete-card:hover {
+            border-color: #dc3545; /* Borde rojo más fuerte al hacer hover */
+        }
+
+        .delete-card .icon {
+            color: #dc3545; /* Icono rojo */
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -86,19 +144,19 @@
             <p>Organiza, gestiona y completa tus tareas de manera eficiente</p>
             <div class="hero-actions">
                 <!-- Botones grandes para las acciones principales -->
-                <a href="crear-tarea.html" class="btn btn-primary btn-large">Comenzar Ahora</a>
-                <a href="ver-tareas.html" class="btn btn-secondary btn-large">Ver Tareas</a>
+                <a href="../ejercicio3/ejercicio3.html" class="btn btn-primary btn-large">Comenzar Ahora</a>
+                <a href="../ejercicio2/ejercicio2.html" class="btn btn-secondary btn-large">Ver Tareas</a>
             </div>
         </div>
 
-        <!-- Grid con las tres opciones principales -->
+        <!-- Grid con las cuatro opciones principales -->
         <div class="action-cards">
             <!-- Tarjeta para ver tareas -->
             <div class="action-card">
                 <div class="icon">👁️</div>
                 <h3>Ver Tareas</h3>
                 <p>Consulta todas tus tareas existentes en el sistema</p>
-                <a href="ver-tareas.html" class="btn btn-outline">Acceder</a>
+                <a href="../ejercicio2/ejercicio2.html" class="btn btn-outline">Acceder</a>
             </div>
 
             <!-- Tarjeta para crear tareas -->
@@ -106,15 +164,23 @@
                 <div class="icon">➕</div>
                 <h3>Crear Tarea</h3>
                 <p>Añade nuevas tareas a tu lista de pendientes</p>
-                <a href="crear-tarea.html" class="btn btn-outline">Crear</a>
+                <a href="../ejercicio3/ejercicio3.html" class="btn btn-outline">Crear</a>
             </div>
 
-            <!-- Tarjeta para gestionar tareas -->
+            <!-- Tarjeta para modificar tareas -->
             <div class="action-card">
                 <div class="icon">⚙️</div>
-                <h3>Gestionar Tareas</h3>
-                <p>Edita, modifica o elimina tus tareas existentes</p>
-                <a href="gestion-tareas.html" class="btn btn-outline">Gestionar</a>
+                <h3>Modificar Tareas</h3>
+                <p>Edita y actualiza tus tareas existentes</p>
+                <a href="../ejercicio4/ejercicio4.html" class="btn btn-outline">Gestionar</a>
+            </div>
+
+            <!-- Tarjeta para eliminar tareas (NUEVA) -->
+            <div class="action-card delete-card">
+                <div class="icon">🗑️</div>
+                <h3>Eliminar Tareas</h3>
+                <p>Elimina tareas que ya no necesites</p>
+                <a href="../ejercicio5/ejercicio5.html" class="btn btn-danger">Eliminar</a>
             </div>
         </div>
     </div>

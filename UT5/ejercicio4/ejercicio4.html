@@ -1,10 +1,9 @@
-<!-- ejercicio4.html - Página para gestionar tareas (editar y eliminar) -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Tareas</title>
+    <title>Gestión de Tareas - Editar</title>
     <link rel="stylesheet" href="css/ejercicio4.css">
 </head>
 <body>
@@ -12,14 +11,11 @@
         <!-- Cabecera de la página -->
         <header>
             <h1>Gestión de Tareas</h1>
-            <p class="description">Visualiza, modifica y elimina tareas del sistema</p>
+            <p class="description">Visualiza y modifica tareas del sistema</p>
             <!-- Botones principales en el header -->
             <div class="header-actions">
                 <button id="newTaskBtn" class="btn btn-primary">
                     <span>➕</span> Nueva Tarea
-                </button>
-                <button id="toggleDeleteBtn" class="btn btn-danger">
-                    <span>🗑️</span> Modo Eliminar
                 </button>
             </div>
         </header>
@@ -120,33 +116,6 @@
                         </button>
                     </div>
                 </form>
-            </div>
-        </div>
-
-        <!-- Modal de Confirmación para Eliminar (se muestra cuando haces click en 🗑️) -->
-        <div id="deleteModal" class="modal">
-            <div class="modal-content delete-modal">
-                <div class="modal-header">
-                    <h2>Confirmar Eliminación</h2>
-                    <!-- Botón para cerrar el modal -->
-                    <button class="close-btn" id="closeDeleteModal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <!-- Muestra el título de la tarea a eliminar -->
-                    <p>¿Estás seguro de que quieres eliminar la tarea <strong id="deleteTaskTitle"></strong>?</p>
-                    <!-- Advertencia en rojo -->
-                    <p class="warning-text">Esta acción no se puede deshacer.</p>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" id="cancelDeleteBtn" class="btn btn-secondary">
-                        Cancelar
-                    </button>
-                    <button type="button" id="confirmDeleteBtn" class="btn btn-danger">
-                        <span id="deleteText">Eliminar Tarea</span>
-                        <!-- Spinner que se muestra mientras se elimina -->
-                        <div id="deleteSpinner" class="spinner" style="display: none;"></div>
-                    </button>
-                </div>
             </div>
         </div>
 

@@ -1,0 +1,573 @@
+/* eliminar-tareas.css - Estilos específicos para la eliminación de tareas */
+
+/* Variables de colores y estilos que uso en toda la página */
+:root {
+    --primary-color: #4a6fa5;      /* Color azul principal */
+    --secondary-color: #6b8cbc;    /* Color azul más claro */
+    --success-color: #28a745;      /* Verde para éxitos */
+    --danger-color: #dc3545;       /* Rojo para errores */
+    --warning-color: #ffc107;      /* Amarillo para advertencias */
+    --light-color: #f8f9fa;        /* Color de fondo claro */
+    --dark-color: #343a40;         /* Color de texto oscuro */
+    --border-radius: 8px;          /* Radio de las esquinas */
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    --transition: all 0.3s ease;   /* Transiciones suaves */
+}
+
+/* Reseteo los estilos por defecto del navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilos generales del body */
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Contenedor principal que centra todo el contenido */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ========== ESTILOS DEL HEADER ========== */
+
+/* Cabecera de la página */
+header {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+}
+
+header h1 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 2.2rem;
+}
+
+.description {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+/* Contenedor de botones en el header */
+.header-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ========== CONTROLES DE BÚSQUEDA ========== */
+
+/* Controles de búsqueda y actualización */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+/* Caja de búsqueda con icono */
+.search-box {
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+/* ========== ESTILOS DE BOTONES ========== */
+
+/* Estilos base para todos los botones */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+/* Botón principal (azul) */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Botón secundario (gris) */
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* Botón de peligro (rojo) */
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+/* Botón de advertencia (amarillo) */
+.btn-warning {
+    background-color: var(--warning-color);
+    color: var(--dark-color);
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+}
+
+/* Botón de actualizar específico */
+.refresh-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.refresh-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* ========== CONTENEDOR DE TAREAS ========== */
+
+/* Grid para las tarjetas de tareas */
+.tasks-container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+
+/* Tarjeta individual de tarea */
+.task-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    border-left: 5px solid var(--primary-color);
+    position: relative;
+}
+
+/* Efecto hover de la tarjeta */
+.task-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Colores del borde izquierdo según el estado */
+.task-card.pendiente {
+    border-left-color: var(--warning-color); /* Amarillo para pendiente */
+}
+
+.task-card.haciendo {
+    border-left-color: var(--primary-color); /* Azul para en progreso */
+}
+
+.task-card.completada {
+    border-left-color: var(--success-color); /* Verde para completada */
+}
+
+/* Colores del borde superior según la prioridad */
+.task-card.alta {
+    border-top: 3px solid var(--danger-color); /* Rojo para alta */
+}
+
+.task-card.media {
+    border-top: 3px solid var(--warning-color); /* Amarillo para media */
+}
+
+.task-card.baja {
+    border-top: 3px solid var(--success-color); /* Verde para baja */
+}
+
+/* Cabecera de la tarjeta con título y botones */
+.task-header {
+    display: flex;
+    justify-content: between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.task-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+/* Botones de eliminar */
+.task-actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0; /* Ocultos por defecto */
+    transition: var(--transition);
+}
+
+/* Mostrar botones al hacer hover */
+.task-card:hover .task-actions {
+    opacity: 1;
+}
+
+/* Mostrar botones siempre en modo eliminar */
+.delete-mode .task-actions {
+    opacity: 1;
+}
+
+/* Botones de acción (eliminar) */
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: var(--transition);
+    font-size: 1.1rem;
+}
+
+/* Efecto hover del botón eliminar */
+.delete-btn:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
+}
+
+/* Descripción de la tarea */
+.task-description {
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    min-height: 60px;
+}
+
+/* Metadatos de la tarea (estado, prioridad, fecha) */
+.task-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* Badge de estado */
+.task-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Colores para los estados */
+.status-pendiente {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-haciendo {
+    background-color: #cce7ff;
+    color: #004085;
+}
+
+.status-completada {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Badge de prioridad */
+.task-priority {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Colores para las prioridades */
+.priority-alta {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.priority-media {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.priority-baja {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Fecha de creación */
+.task-date {
+    font-style: italic;
+    margin-left: auto;
+}
+
+/* ========== MODALES ========== */
+
+/* Fondo del modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s;
+}
+
+/* Modal de eliminación más pequeño */
+.delete-modal {
+    max-width: 500px;
+}
+
+/* Cabecera del modal */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+    color: var(--dark-color);
+    margin: 0;
+}
+
+/* Botón para cerrar el modal */
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #777;
+    transition: var(--transition);
+}
+
+.close-btn:hover {
+    color: var(--danger-color);
+}
+
+/* Cuerpo del modal */
+.modal-body {
+    padding: 25px;
+}
+
+/* Texto de advertencia en rojo */
+.warning-text {
+    color: var(--danger-color);
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Botones del modal */
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* ========== ESTADOS DE LA APLICACIÓN ========== */
+
+/* Mensajes de estado (loading, error, sin resultados) */
+.loading, .error, .no-results {
+    text-align: center;
+    padding: 40px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+}
+
+.error {
+    color: var(--danger-color);
+    background-color: #f8d7da;
+}
+
+.no-results {
+    color: #666;
+}
+
+/* Spinner de carga */
+.spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+/* Animación del spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Animaciones para los modales */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ========== MODO ELIMINACIÓN ========== */
+
+/* Estilos cuando está activo el modo eliminar */
+.delete-mode .task-card {
+    border: 2px solid var(--danger-color); /* Borde rojo en todas las tarjetas */
+}
+
+.delete-mode .task-actions {
+    opacity: 1; /* Mostrar botones siempre */
+}
+
+/* ========== ESTILOS RESPONSIVE ========== */
+
+/* Para tablets y móviles grandes */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .tasks-container {
+        grid-template-columns: 1fr; /* Una columna en móviles */
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-box {
+        min-width: 100%;
+    }
+    
+    .header-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .task-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .task-date {
+        margin-left: 0;
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
+    }
+}
+
+/* Para móviles pequeños */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .task-title {
+        font-size: 1.1rem;
+    }
+    
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}

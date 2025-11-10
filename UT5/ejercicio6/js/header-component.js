@@ -10,80 +10,80 @@ class HeaderComponent extends HTMLElement {
     connectedCallback() {
         this.render();           // Pinto el HTML
         this.setActiveLink();    // Marco el enlace activo
+        this.setupEventListeners(); // Configuro eventos
     }
 
     // Pinto el HTML de la cabecera
     render() {
         this.innerHTML = `
             <header class="main-header">
-                <div class="header-content">
-                    <div class="logo">
-                        <h1>📝 Gestor de Tareas</h1>
+                <div class="header-container">
+                    <!-- Logo y título -->
+                    <div class="header-brand">
+                        <div class="header-logo">📋</div>
+                        <h1 class="header-title">
+                            <a href="index.html">Inicio</a>
+                        </h1>
                     </div>
-                    <nav class="navigation">
-                        <ul class="nav-list">
-                            <li class="nav-item">
-                                <a href="index.html" class="nav-link" data-page="home">
-                                    <span>🏠</span> Inicio
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="ver-tareas.html" class="nav-link" data-page="view">
-                                    <span>👁️</span> Ver Tareas
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="crear-tarea.html" class="nav-link" data-page="create">
-                                    <span>➕</span> Crear Tarea
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="gestion-tareas.html" class="nav-link" data-page="manage">
-                                    <span>⚙️</span> Gestionar Tareas
-                                </a>
-                            </li>
-                        </ul>
+
+                    <!-- Navegación principal -->
+                    <nav class="header-nav">
+                        <a href="../ejercicio2/ejercicio2.html" class="nav-btn">
+                            👁️ Ver Tareas
+                        </a>
+                        <a href="../ejercicio3/ejercicio3.html" class="nav-btn">
+                            ➕ Crear Tarea
+                        </a>
+                        <a href="../ejercicio4/ejercicio4.html" class="nav-btn">
+                            ⚙️ Modificar Tareas
+                        </a>
+                        <a href="../ejercicio5/ejercicio5.html" class="nav-btn">
+                            🗑️ Eliminar Tareas
+                        </a>
                     </nav>
-                    <div class="header-actions">
-                        <button id="themeToggle" class="btn btn-secondary">
-                            <span>🌙</span> Tema
-                        </button>
-                    </div>
                 </div>
             </header>
         `;
-
-        // Configuro los event listeners para que todo funcione
-        this.setupEventListeners();
     }
 
     // Configuro los eventos de los botones y enlaces
     setupEventListeners() {
-        const themeToggle = this.querySelector('#themeToggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', this.toggleTheme);
+        // Solo añado evento para el logo/título de inicio
+        const headerTitle = this.querySelector('.header-title a');
+        if (headerTitle) {
+            headerTitle.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.handleNavigation('index.html');
+            });
         }
-
-        // Navegación suave para todos los enlaces
-        const navLinks = this.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', this.handleNavigation);
-        });
     }
 
     // Marco qué enlace está activo según la página actual
     setActiveLink() {
         const currentPage = this.getCurrentPage();
-        const navLinks = this.querySelectorAll('.nav-link');
+        const navButtons = this.querySelectorAll('.nav-btn');
         
         // Quito la clase active de todos
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            // Y se la pongo al que corresponde con la página actual
-            if (link.getAttribute('data-page') === currentPage) {
-                link.classList.add('active');
+        navButtons.forEach(button => {
+            button.classList.remove('active');
+        });
+        
+        // Y se la pongo al que corresponde con la página actual
+        navButtons.forEach(button => {
+            const buttonHref = button.getAttribute('href');
+            if (buttonHref && buttonHref.includes(currentPage)) {
+                button.classList.add('active');
             }
         });
+
+        // Marco también el título "Inicio" si estamos en index.html
+        if (currentPage === 'index.html') {
+            const headerTitle = this.querySelector('.header-title a');
+            if (headerTitle) {
+                headerTitle.style.fontWeight = 'bold';
+                headerTitle.style.color = 'var(--primary-color)';
+            }
+        }
     }
 
     // Averiguo en qué página estoy según la URL
@@ -91,50 +91,18 @@ class HeaderComponent extends HTMLElement {
         const path = window.location.pathname;
         const page = path.split('/').pop();  // Obtengo el nombre del archivo
         
-        // Mapeo nombres de archivo a códigos de página
-        const pageMap = {
-            'index.html': 'home',
-            'ver-tareas.html': 'view',
-            'crear-tarea.html': 'create',
-            'gestion-tareas.html': 'manage'
-        };
-
-        return pageMap[page] || 'home';  // Si no está, devuelvo 'home'
-    }
-
-    // Cambio entre tema claro y oscuro
-    toggleTheme() {
-        const body = document.body;
-        const currentTheme = body.getAttribute('data-theme') || 'light';
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        // Aplico el nuevo tema
-        body.setAttribute('data-theme', newTheme);
-        // Guardo la preferencia en localStorage
-        localStorage.setItem('theme', newTheme);
-
-        // Actualizo el icono del botón
-        const themeToggle = document.querySelector('#themeToggle');
-        if (themeToggle) {
-            const icon = themeToggle.querySelector('span');
-            // Cambio entre luna y sol
-            const text = themeToggle.textContent.includes('🌙') ? '☀️' : '🌙';
-            icon.textContent = text;
-        }
+        return page || 'index.html';
     }
 
     // Manejo la navegación con efecto suave
-    handleNavigation(event) {
-        event.preventDefault();  // Evito la navegación normal
-        const href = event.currentTarget.getAttribute('href');
-        
-        // Efecto de transición: la página se vuelve semi-transparente
-        document.body.style.opacity = '0.7';
-        
-        // Después de un momento, navego
-        setTimeout(() => {
-            window.location.href = href;
-        }, 200);
+    handleNavigation(url) {
+        // Usar la navegación global de app.js si está disponible
+        if (window.taskManagerApp && window.taskManagerApp.handleNavigation) {
+            window.taskManagerApp.handleNavigation(url);
+        } else {
+            // Fallback: navegación normal
+            window.location.href = url;
+        }
     }
 }
 

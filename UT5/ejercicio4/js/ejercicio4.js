@@ -1,4 +1,4 @@
-// ejercicio4.js - Código para gestionar tareas (editar y eliminar)
+// ejercicio4.js - Código para gestionar tareas (solo edición)
 document.addEventListener('DOMContentLoaded', function () {
     // Estos son todos los elementos del HTML que voy a usar
     const tasksContainer = document.getElementById('tasksContainer');
@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const showExampleBtn = document.getElementById('showExampleBtn');
     const createFirstTaskBtn = document.getElementById('createFirstTaskBtn');
     const newTaskBtn = document.getElementById('newTaskBtn');
-    const toggleDeleteBtn = document.getElementById('toggleDeleteBtn');
 
     // Elementos del modal de edición (para modificar tareas)
     const editModal = document.getElementById('editModal');
@@ -28,19 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeEditModal = document.getElementById('closeEditModal');
     const cancelEditBtn = document.getElementById('cancelEditBtn');
 
-    // Elementos del modal de eliminación (para borrar tareas)
-    const deleteModal = document.getElementById('deleteModal');
-    const deleteTaskTitle = document.getElementById('deleteTaskTitle');
-    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-    const deleteText = document.getElementById('deleteText');
-    const deleteSpinner = document.getElementById('deleteSpinner');
-    const closeDeleteModal = document.getElementById('closeDeleteModal');
-    const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-
     // Variables para guardar el estado de la aplicación
-    let allTasks = [];          // Todas las tareas del servidor
-    let isDeleteMode = false;   // Si estamos en modo eliminar
-    let taskToDelete = null;    // La tarea que queremos eliminar
+    let allTasks = []; // Todas las tareas del servidor
 
     // Cuando se carga la página, cargo las tareas
     loadTasks();
@@ -48,15 +36,20 @@ document.addEventListener('DOMContentLoaded', function () {
     // Configuro todos los event listeners para que los botones funcionen
     searchInput.addEventListener('input', filterTasks);
     refreshBtn.addEventListener('click', loadTasks);
-    newTaskBtn.addEventListener('click', redirectToNewTask);
-    toggleDeleteBtn.addEventListener('click', toggleDeleteMode);
+    
+    // REDIRECCIÓN AÑADIDA - Botón "Nueva Tarea"
+    newTaskBtn.addEventListener('click', function() {
+        window.location.href = '../ejercicio3/ejercicio3.html';
+    });
     
     if (showExampleBtn) {
         showExampleBtn.addEventListener('click', showExampleData);
     }
     
     if (createFirstTaskBtn) {
-        createFirstTaskBtn.addEventListener('click', redirectToNewTask);
+        createFirstTaskBtn.addEventListener('click', function() {
+            window.location.href = '../ejercicio3/ejercicio3.html';
+        });
     }
 
     // Event listeners para el modal de edición
@@ -64,18 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
     closeEditModal.addEventListener('click', closeEditModalHandler);
     cancelEditBtn.addEventListener('click', closeEditModalHandler);
 
-    // Event listeners para el modal de eliminación
-    confirmDeleteBtn.addEventListener('click', handleDeleteTask);
-    closeDeleteModal.addEventListener('click', closeDeleteModalHandler);
-    cancelDeleteBtn.addEventListener('click', closeDeleteModalHandler);
-
-    // Cerrar modales si haces click fuera de ellos
+    // Cerrar modal si haces click fuera de él
     window.addEventListener('click', function (event) {
         if (event.target === editModal) {
             closeEditModalHandler();
-        }
-        if (event.target === deleteModal) {
-            closeDeleteModalHandler();
         }
     });
 
@@ -159,9 +144,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="task-actions">
                     <button class="action-btn edit-btn" title="Editar tarea" onclick="openEditModal('${task.id}')">
                         ✏️
-                    </button>
-                    <button class="action-btn delete-btn" title="Eliminar tarea" onclick="openDeleteModal('${task.id}')">
-                        🗑️
                     </button>
                 </div>
             </div>
@@ -268,76 +250,6 @@ document.addEventListener('DOMContentLoaded', function () {
         } finally {
             // Siempre quito el estado de carga
             setUpdateLoadingState(false);
-        }
-    }
-
-    // Esta función abre el modal para eliminar una tarea
-    window.openDeleteModal = function (taskId) {
-        // Busco la tarea por su ID
-        const task = allTasks.find(t => t.id == taskId);
-        if (!task) {
-            alert('Tarea no encontrada');
-            return;
-        }
-
-        // Guardo la tarea a eliminar y muestro su título en el modal
-        taskToDelete = task;
-        deleteTaskTitle.textContent = `"${task.title}"`;
-        deleteModal.style.display = 'block';
-    };
-
-    // Esta función maneja la eliminación de una tarea
-    async function handleDeleteTask() {
-        if (!taskToDelete) return; // Por si acaso
-
-        // Muestro que está cargando
-        setDeleteLoadingState(true);
-
-        try {
-            // Envío la petición DELETE al servidor
-            const response = await fetch(`http://localhost:3000/tasks/${taskToDelete.id}`, {
-                method: 'DELETE'
-            });
-
-            // Verifico que el servidor responda bien
-            if (!response.ok) {
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
-            }
-
-            // Elimino la tarea de la lista local
-            allTasks = allTasks.filter(t => t.id !== taskToDelete.id);
-            displayTasks(allTasks);
-
-            // Cierro el modal y muestro mensaje de éxito
-            closeDeleteModalHandler();
-            showNotification('Tarea eliminada exitosamente', 'success');
-
-        } catch (error) {
-            // Si hay error, lo muestro
-            console.error('Error al eliminar la tarea:', error);
-            showNotification('Error al eliminar la tarea: ' + error.message, 'error');
-        } finally {
-            // Siempre quito el estado de carga
-            setDeleteLoadingState(false);
-            taskToDelete = null;
-        }
-    }
-
-    // Esta función activa/desactiva el modo eliminar
-    function toggleDeleteMode() {
-        isDeleteMode = !isDeleteMode;
-        
-        if (isDeleteMode) {
-            // Modo eliminar activado
-            toggleDeleteBtn.innerHTML = '<span>❌</span> Salir del Modo Eliminar';
-            toggleDeleteBtn.classList.add('btn-warning');
-            document.body.classList.add('delete-mode');
-            showNotification('Modo eliminación activado. Haz clic en el icono 🗑️ para eliminar tareas.', 'warning');
-        } else {
-            // Modo eliminar desactivado
-            toggleDeleteBtn.innerHTML = '<span>🗑️</span> Modo Eliminar';
-            toggleDeleteBtn.classList.remove('btn-warning');
-            document.body.classList.remove('delete-mode');
         }
     }
 
@@ -486,19 +398,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Para el modal de eliminación
-    function setDeleteLoadingState(isLoading) {
-        if (isLoading) {
-            deleteText.style.display = 'none';
-            deleteSpinner.style.display = 'inline-block';
-            confirmDeleteBtn.disabled = true;
-        } else {
-            deleteText.style.display = 'inline-block';
-            deleteSpinner.style.display = 'none';
-            confirmDeleteBtn.disabled = false;
-        }
-    }
-
     // ========== FUNCIONES PARA CERRAR MODALES ==========
 
     function closeEditModalHandler() {
@@ -506,16 +405,11 @@ document.addEventListener('DOMContentLoaded', function () {
         editTaskForm.reset();
     }
 
-    function closeDeleteModalHandler() {
-        deleteModal.style.display = 'none';
-        taskToDelete = null;
-    }
-
     // ========== FUNCIONES DE UTILIDAD ==========
 
     // Redirige a la página de crear nueva tarea
     function redirectToNewTask() {
-        window.location.href = 'ejercicio3.html';
+        window.location.href = '../ejercicio3/ejercicio3.html';
     }
 
     // Convierte el código de estado a texto legible

@@ -1,4 +1,4 @@
-/* ejercicio4.css - Estilos para la gestión completa de tareas (editar y eliminar) */
+/* ejercicio4.css - Estilos para la edición de tareas */
 
 /* Variables de colores y estilos que uso en toda la página */
 :root {
@@ -146,28 +146,6 @@ header h1 {
     transform: translateY(-2px);
 }
 
-/* Botón de peligro (rojo) */
-.btn-danger {
-    background-color: var(--danger-color);
-    color: white;
-}
-
-.btn-danger:hover {
-    background-color: #c82333;
-    transform: translateY(-2px);
-}
-
-/* Botón de advertencia (amarillo) */
-.btn-warning {
-    background-color: var(--warning-color);
-    color: var(--dark-color);
-}
-
-.btn-warning:hover {
-    background-color: #e0a800;
-    transform: translateY(-2px);
-}
-
 /* Botón de actualizar específico */
 .refresh-btn {
     background-color: var(--primary-color);
@@ -256,7 +234,7 @@ header h1 {
     flex: 1;
 }
 
-/* Botones de editar y eliminar */
+/* Botones de editar */
 .task-actions {
     display: flex;
     gap: 8px;
@@ -269,12 +247,7 @@ header h1 {
     opacity: 1;
 }
 
-/* Mostrar botones siempre en modo eliminar */
-.delete-mode .task-actions {
-    opacity: 1;
-}
-
-/* Botones de acción (editar y eliminar) */
+/* Botones de acción (editar) */
 .action-btn {
     background: none;
     border: none;
@@ -289,12 +262,6 @@ header h1 {
 .edit-btn:hover {
     background-color: rgba(74, 111, 165, 0.1);
     color: var(--primary-color);
-}
-
-/* Efecto hover del botón eliminar */
-.delete-btn:hover {
-    background-color: rgba(220, 53, 69, 0.1);
-    color: var(--danger-color);
 }
 
 /* Descripción de la tarea */
@@ -402,11 +369,6 @@ header h1 {
     animation: slideIn 0.3s;
 }
 
-/* Modal de eliminación más pequeño */
-.delete-modal {
-    max-width: 500px;
-}
-
 /* Cabecera del modal */
 .modal-header {
     display: flex;
@@ -433,18 +395,6 @@ header h1 {
 
 .close-btn:hover {
     color: var(--danger-color);
-}
-
-/* Cuerpo del modal */
-.modal-body {
-    padding: 25px;
-}
-
-/* Texto de advertencia en rojo */
-.warning-text {
-    color: var(--danger-color);
-    font-weight: bold;
-    margin-top: 10px;
 }
 
 /* ========== FORMULARIOS EN MODAL ========== */
@@ -502,8 +452,7 @@ header h1 {
 }
 
 /* Botones del formulario en modal */
-.form-actions,
-.modal-actions {
+.form-actions {
     display: flex;
     gap: 15px;
     justify-content: flex-end;
@@ -577,17 +526,6 @@ header h1 {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* ========== MODO ELIMINACIÓN ========== */
-
-/* Estilos cuando está activo el modo eliminar */
-.delete-mode .task-card {
-    border: 2px solid var(--danger-color); /* Borde rojo en todas las tarjetas */
-}
-
-.delete-mode .task-actions {
-    opacity: 1; /* Mostrar botones siempre */
-}
-
 /* ========== ESTILOS RESPONSIVE ========== */
 
 /* Para tablets y móviles grandes */
@@ -619,8 +557,7 @@ header h1 {
         gap: 0;
     }
     
-    .form-actions,
-    .modal-actions {
+    .form-actions {
         flex-direction: column;
     }
     

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Tareas - Ejercicio 5</title>
+    <link rel="stylesheet" href="css/ejercicio5.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Cabecera de la página -->
+        <header>
+            <h1>Eliminar Tareas</h1>
+            <p class="description">Gestiona y elimina tareas del sistema</p>
+
+            <!-- Botones principales en el header -->
+            <div class="header-actions">
+                <button id="newTaskBtn" class="btn btn-primary">
+                    <span>➕</span> Nueva Tarea
+                </button>
+                <button id="toggleDeleteBtn" class="btn btn-danger">
+                    <span>🗑️</span> Modo Eliminar
+                </button>
+            </div>
+        </header>
+
+        <!-- Controles de búsqueda y actualización -->
+        <div class="controls">
+            <div class="search-box">
+                <i>🔍</i>
+                <input type="text" id="searchInput" placeholder="Buscar tareas...">
+            </div>
+            <button class="refresh-btn" id="refreshBtn">
+                <span>🔄</span> Actualizar
+            </button>
+        </div>
+
+        <!-- Para confirmar si queremos eliminar la tarea -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content delete-modal">
+                <div class="modal-header">
+                    <h2>Confirmar Eliminación</h2>
+                    <!-- Botón para cerrar el modal -->
+                    <button class="close-btn" id="closeDeleteModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Muestra el título de la tarea a eliminar -->
+                    <p>¿Estás seguro de que quieres eliminar la tarea <strong id="deleteTaskTitle"></strong>?</p>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="cancelDeleteBtn" class="btn btn-secondary">
+                        Cancelar
+                    </button>
+                    <button type="button" id="confirmDeleteBtn" class="btn btn-danger">
+                        <span id="deleteText">Eliminar Tarea</span>
+                        <!-- Spinner que se muestra mientras se elimina -->
+                        <div id="deleteSpinner" class="spinner" style="display: none;"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor donde se muestran todas las tareas -->
+        <div class="tasks-container" id="tasksContainer">
+            <!-- Las tareas se cargan aquí con el archivo de JavaScript -->
+        </div>
+
+        <!-- Mensaje que se muestra mientras se cargan las tareas -->
+        <div id="loadingMessage" class="loading">
+            <div class="spinner"></div>
+            <p>Cargando tareas...</p>
+        </div>
+
+        <!-- Mensaje que se muestra si hay error al cargar -->
+        <div id="errorMessage" class="error" style="display: none;">
+            <button id="showExampleBtn" class="btn btn-secondary">
+                Mostrar Datos de Ejemplo
+            </button>
+        </div>
+
+        <!-- Mensaje que se muestra si no hay resultados de búsqueda -->
+        <div id="noResultsMessage" class="no-results" style="display: none;">
+            <p>No se encontraron tareas que coincidan con los criterios de búsqueda.</p>
+        </div>
+
+        <!-- Mensaje que se muestra si no hay tareas en absoluto -->
+        <div id="noTasksMessage" class="no-results" style="display: none;">
+            <p>No hay tareas disponibles. ¡Crea tu primera tarea!</p>
+            <button id="createFirstTaskBtn" class="btn btn-primary">
+                Crear Primera Tarea
+            </button>
+        </div>
+    </div>
+
+    <!-- Importo el JavaScript -->
+    <script src="js/ejercicio5.js"></script>
+
+</body>
+
+</html>
