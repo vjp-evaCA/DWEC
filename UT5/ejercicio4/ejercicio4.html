@@ -1,3 +1,4 @@
+<!-- ejercicio4.html - Página para gestionar tareas (editar y eliminar) -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,9 +9,11 @@
 </head>
 <body>
     <div class="container">
+        <!-- Cabecera de la página -->
         <header>
             <h1>Gestión de Tareas</h1>
             <p class="description">Visualiza, modifica y elimina tareas del sistema</p>
+            <!-- Botones principales en el header -->
             <div class="header-actions">
                 <button id="newTaskBtn" class="btn btn-primary">
                     <span>➕</span> Nueva Tarea
@@ -21,6 +24,7 @@
             </div>
         </header>
 
+        <!-- Controles de búsqueda y actualización -->
         <div class="controls">
             <div class="search-box">
                 <i>🔍</i>
@@ -31,16 +35,19 @@
             </button>
         </div>
 
-        <!-- Modal para Editar Tarea -->
+        <!-- Modal para Editar Tarea (se muestra cuando haces click en ✏️) -->
         <div id="editModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2>Editar Tarea</h2>
+                    <!-- Botón para cerrar el modal -->
                     <button class="close-btn" id="closeEditModal">&times;</button>
                 </div>
                 <form id="editTaskForm" class="task-form">
+                    <!-- Campo oculto para guardar el ID de la tarea -->
                     <input type="hidden" id="editTaskId">
                     
+                    <!-- Campo para el título -->
                     <div class="form-group">
                         <label for="editTitle" class="form-label">Título *</label>
                         <input 
@@ -51,9 +58,11 @@
                             required
                             minlength="3"
                         >
+                        <!-- Aquí se mostrarán los errores del título -->
                         <span class="error-message" id="editTitleError"></span>
                     </div>
 
+                    <!-- Campo para la descripción -->
                     <div class="form-group">
                         <label for="editDescription" class="form-label">Descripción *</label>
                         <textarea 
@@ -64,9 +73,11 @@
                             required
                             minlength="10"
                         ></textarea>
+                        <!-- Aquí se mostrarán los errores de la descripción -->
                         <span class="error-message" id="editDescriptionError"></span>
                     </div>
 
+                    <!-- Fila con estado y prioridad -->
                     <div class="form-row">
                         <div class="form-group">
                             <label for="editEstado" class="form-label">Estado</label>
@@ -87,6 +98,7 @@
                         </div>
                     </div>
 
+                    <!-- Campo para fecha límite -->
                     <div class="form-group">
                         <label for="editDueDate" class="form-label">Fecha Límite</label>
                         <input 
@@ -96,12 +108,14 @@
                         >
                     </div>
 
+                    <!-- Botones del modal de edición -->
                     <div class="form-actions">
                         <button type="button" id="cancelEditBtn" class="btn btn-secondary">
                             Cancelar
                         </button>
                         <button type="submit" id="updateTaskBtn" class="btn btn-primary">
                             <span id="updateText">Actualizar Tarea</span>
+                            <!-- Spinner que se muestra mientras se actualiza -->
                             <div id="updateSpinner" class="spinner" style="display: none;"></div>
                         </button>
                     </div>
@@ -109,15 +123,18 @@
             </div>
         </div>
 
-        <!-- Modal de Confirmación para Eliminar -->
+        <!-- Modal de Confirmación para Eliminar (se muestra cuando haces click en 🗑️) -->
         <div id="deleteModal" class="modal">
             <div class="modal-content delete-modal">
                 <div class="modal-header">
                     <h2>Confirmar Eliminación</h2>
+                    <!-- Botón para cerrar el modal -->
                     <button class="close-btn" id="closeDeleteModal">&times;</button>
                 </div>
                 <div class="modal-body">
+                    <!-- Muestra el título de la tarea a eliminar -->
                     <p>¿Estás seguro de que quieres eliminar la tarea <strong id="deleteTaskTitle"></strong>?</p>
+                    <!-- Advertencia en rojo -->
                     <p class="warning-text">Esta acción no se puede deshacer.</p>
                 </div>
                 <div class="modal-actions">
@@ -126,23 +143,27 @@
                     </button>
                     <button type="button" id="confirmDeleteBtn" class="btn btn-danger">
                         <span id="deleteText">Eliminar Tarea</span>
+                        <!-- Spinner que se muestra mientras se elimina -->
                         <div id="deleteSpinner" class="spinner" style="display: none;"></div>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Contenedor de Tareas -->
+        <!-- Contenedor donde se muestran todas las tareas -->
         <div class="tasks-container" id="tasksContainer">
-            <!-- Las tareas se cargarán aquí dinámicamente -->
+            <!-- Las tareas se cargan aquí dinámicamente con JavaScript -->
         </div>
 
-        <!-- Estados de la aplicación -->
+        <!-- ========== MENSAJES DE ESTADO ========== -->
+
+        <!-- Mensaje que se muestra mientras se cargan las tareas -->
         <div id="loadingMessage" class="loading">
             <div class="spinner"></div>
             <p>Cargando tareas...</p>
         </div>
 
+        <!-- Mensaje que se muestra si hay error al cargar -->
         <div id="errorMessage" class="error" style="display: none;">
             <p>Error al cargar las tareas. Verifica que el servidor esté ejecutándose en localhost:3000</p>
             <button id="showExampleBtn" class="btn btn-secondary">
@@ -150,10 +171,12 @@
             </button>
         </div>
 
+        <!-- Mensaje que se muestra si no hay resultados de búsqueda -->
         <div id="noResultsMessage" class="no-results" style="display: none;">
             <p>No se encontraron tareas que coincidan con los criterios de búsqueda.</p>
         </div>
 
+        <!-- Mensaje que se muestra si no hay tareas en absoluto -->
         <div id="noTasksMessage" class="no-results" style="display: none;">
             <p>No hay tareas disponibles. ¡Crea tu primera tarea!</p>
             <button id="createFirstTaskBtn" class="btn btn-primary">
@@ -162,6 +185,7 @@
         </div>
     </div>
 
-    <script src="js/gestion-tareas.js"></script>
+    <!-- Importo el JavaScript -->
+    <script src="js/ejercicio4.js"></script>
 </body>
 </html>

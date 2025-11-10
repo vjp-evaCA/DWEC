@@ -1,3 +1,4 @@
+<!-- ejercicio3.html - Página para crear nuevas tareas -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,12 +9,15 @@
 </head>
 <body>
     <div class="container">
+        <!-- Cabecera de la página -->
         <header>
             <h1>Crear Nueva Tarea</h1>
             <p class="description">Completa el formulario para agregar una nueva tarea al sistema</p>
         </header>
 
+        <!-- Formulario principal para crear tareas -->
         <form id="taskForm" class="task-form">
+            <!-- Campo para el título -->
             <div class="form-group">
                 <label for="title" class="form-label">Título </label>
                 <input 
@@ -24,9 +28,11 @@
                     required
                     minlength="3"
                 >
+                <!-- Aquí se mostrarán los errores del título -->
                 <span class="error-message" id="titleError"></span>
             </div>
 
+            <!-- Campo para la descripción -->
             <div class="form-group">
                 <label for="description" class="form-label">Descripción </label>
                 <textarea 
@@ -37,10 +43,13 @@
                     required
                     minlength="10"
                 ></textarea>
+                <!-- Aquí se mostrarán los errores de la descripción -->
                 <span class="error-message" id="descriptionError"></span>
             </div>
 
+            <!-- Fila con estado y prioridad -->
             <div class="form-row">
+                <!-- Selector de estado -->
                 <div class="form-group">
                     <label for="estado" class="form-label">Estado</label>
                     <select id="estado" class="form-select">
@@ -50,6 +59,7 @@
                     </select>
                 </div>
 
+                <!-- Selector de prioridad -->
                 <div class="form-group">
                     <label for="priority" class="form-label">Prioridad</label>
                     <select id="priority" class="form-select">
@@ -60,6 +70,7 @@
                 </div>
             </div>
 
+            <!-- Campo para fecha límite -->
             <div class="form-group">
                 <label for="dueDate" class="form-label">Fecha Límite</label>
                 <input 
@@ -69,18 +80,20 @@
                 >
             </div>
 
+            <!-- Botones de acción del formulario -->
             <div class="form-actions">
                 <button type="button" id="cancelBtn" class="btn btn-secondary">
                     Cancelar
                 </button>
                 <button type="submit" id="submitBtn" class="btn btn-primary">
                     <span id="submitText">Crear Tarea</span>
+                    <!-- Spinner que se muestra mientras se envía -->
                     <div id="submitSpinner" class="spinner" style="display: none;"></div>
                 </button>
             </div>
         </form>
 
-        <!-- Mensajes de estado -->
+        <!-- Mensaje que se muestra cuando la tarea se crea bien -->
         <div id="successMessage" class="message success" style="display: none;">
             <h3>✅ Tarea creada exitosamente</h3>
             <p>La tarea ha sido agregada correctamente al sistema.</p>
@@ -88,18 +101,21 @@
             <button id="createAnotherBtn" class="btn btn-secondary">Crear Otra Tarea</button>
         </div>
 
+        <!-- Mensaje que se muestra cuando hay error al crear -->
         <div id="errorMessage" class="message error" style="display: none;">
             <h3>❌ Error al crear la tarea</h3>
             <p id="errorDetails">Ha ocurrido un error al intentar crear la tarea.</p>
             <button id="retryBtn" class="btn btn-primary">Reintentar</button>
         </div>
 
+        <!-- Mensaje que se muestra cuando hay errores de validación -->
         <div id="validationErrors" class="message warning" style="display: none;">
             <h3>⚠️ Errores en el formulario</h3>
             <ul id="errorsList"></ul>
         </div>
     </div>
 
-    <script src="js/formulario-tarea.js"></script>
+    <!-- Importo el JavaScript -->
+    <script src="js/ejercicio3.js"></script>
 </body>
 </html>

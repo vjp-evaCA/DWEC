@@ -1,5 +1,6 @@
+// ejercicio3.js - Este es el código para crear nuevas tareas
 document.addEventListener('DOMContentLoaded', function () {
-    // Elementos del formulario
+    // Estos son todos los elementos del formulario que voy a usar
     const taskForm = document.getElementById('taskForm');
     const titleInput = document.getElementById('title');
     const descriptionInput = document.getElementById('description');
@@ -10,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitText = document.getElementById('submitText');
     const submitSpinner = document.getElementById('submitSpinner');
 
-    // Elementos de mensajes
+    // Elementos para mostrar mensajes al usuario
     const successMessage = document.getElementById('successMessage');
     const errorMessage = document.getElementById('errorMessage');
     const validationErrors = document.getElementById('validationErrors');
@@ -23,48 +24,48 @@ document.addEventListener('DOMContentLoaded', function () {
     const createAnotherBtn = document.getElementById('createAnotherBtn');
     const retryBtn = document.getElementById('retryBtn');
 
-    // Variables para almacenar datos en caso de reintento
+    // Guardo los datos del formulario por si hay que reintentar
     let lastFormData = null;
 
-    // Configurar fecha mínima como hoy
+    // Pongo que la fecha mínima sea hoy, no se pueden crear tareas para el pasado
     const today = new Date().toISOString().slice(0, 16);
     dueDateInput.min = today;
 
-    // Event Listeners
+    // Configuro todos los event listeners para que los botones funcionen
     taskForm.addEventListener('submit', handleFormSubmit);
     cancelBtn.addEventListener('click', handleCancel);
     viewTasksBtn.addEventListener('click', redirectToTasks);
     createAnotherBtn.addEventListener('click', resetForm);
     retryBtn.addEventListener('click', handleRetry);
 
-    // Validación en tiempo real
+    // Validación en tiempo real cuando el usuario sale de los campos
     titleInput.addEventListener('blur', validateTitle);
     descriptionInput.addEventListener('blur', validateDescription);
 
-    // Función principal para enviar el formulario
+    // Esta función se ejecuta cuando el usuario envía el formulario
     async function handleFormSubmit(event) {
-        event.preventDefault();
+        event.preventDefault(); // Evito que el formulario se envíe de la forma normal
         
-        // Validar formulario
+        // Primero valido que todo esté bien
         const isValid = validateForm();
         
         if (!isValid) {
-            showValidationErrors();
+            showValidationErrors(); // Si hay errores, los muestro
             return;
         }
 
-        // Ocultar mensajes anteriores
+        // Oculto cualquier mensaje anterior
         hideAllMessages();
 
-        // Preparar datos para enviar
+        // Preparo los datos para enviar al servidor
         const formData = getFormData();
-        lastFormData = formData; // Guardar para posible reintento
+        lastFormData = formData; // Guardo por si hay que reintentar
 
-        // Mostrar estado de carga
+        // Muestro que está cargando
         setLoadingState(true);
 
         try {
-            // Enviar petición POST
+            // Envío la tarea nueva al servidor con POST
             const response = await fetch('http://localhost:3000/tasks', {
                 method: 'POST',
                 headers: {
@@ -73,26 +74,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: JSON.stringify(formData)
             });
 
-            // Verificar si la respuesta es correcta (código 200-299)
+            // Verifico que el servidor responda bien
             if (!response.ok) {
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
             }
 
-            // Procesar respuesta exitosa
+            // Si todo sale bien, proceso la respuesta
             const result = await response.json();
-            showSuccessMessage();
+            showSuccessMessage(); // Muestro mensaje de éxito
             
             console.log('Tarea creada exitosamente:', result);
 
         } catch (error) {
+            // Si hay error, lo muestro
             console.error('Error al crear la tarea:', error);
             showErrorMessage(error.message);
         } finally {
+            // Siempre quito el estado de carga
             setLoadingState(false);
         }
     }
 
-    // Función para obtener datos del formulario
+    // Esta función junta todos los datos del formulario
     function getFormData() {
         return {
             title: titleInput.value.trim(),
@@ -100,24 +103,22 @@ document.addEventListener('DOMContentLoaded', function () {
             estado: estadoSelect.value,
             priority: prioritySelect.value,
             dueDate: dueDateInput.value || null,
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString() // Pongo la fecha actual
         };
     }
 
-    // Función para validar el formulario completo
+    // Valido todo el formulario
     function validateForm() {
         let isValid = true;
 
-        // Validar título
+        // Valido título y descripción
         if (!validateTitle()) isValid = false;
-
-        // Validar descripción
         if (!validateDescription()) isValid = false;
 
         return isValid;
     }
 
-    // Validación individual del título
+    // Valido que el título tenga al menos 3 caracteres
     function validateTitle() {
         const title = titleInput.value.trim();
         const errorElement = document.getElementById('titleError');
@@ -131,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Validación individual de la descripción
+    // Valido que la descripción tenga al menos 10 caracteres
     function validateDescription() {
         const description = descriptionInput.value.trim();
         const errorElement = document.getElementById('descriptionError');
@@ -145,22 +146,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Mostrar error en campo individual
+    // Muestro error en un campo individual
     function showFieldError(inputElement, errorElement, message) {
-        inputElement.classList.add('error');
-        errorElement.textContent = message;
+        inputElement.classList.add('error'); // Pongo borde rojo
+        errorElement.textContent = message; // Muestro el mensaje de error
     }
 
-    // Limpiar error de campo individual
+    // Limpio el error de un campo
     function clearFieldError(inputElement, errorElement) {
         inputElement.classList.remove('error');
         errorElement.textContent = '';
     }
 
-    // Mostrar errores de validación globales
+    // Muestro todos los errores de validación juntos
     function showValidationErrors() {
         const errors = [];
         
+        // Recojo todos los errores
         if (titleInput.value.trim().length < 3) {
             errors.push('El título debe tener al menos 3 caracteres');
         }
@@ -169,35 +171,36 @@ document.addEventListener('DOMContentLoaded', function () {
             errors.push('La descripción debe tener al menos 10 caracteres');
         }
 
+        // Los muestro en una lista
         errorsList.innerHTML = errors.map(error => `<li>${error}</li>`).join('');
         validationErrors.style.display = 'block';
         
-        // Scroll hacia los errores
+        // Hago scroll para que el usuario vea los errores
         validationErrors.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Mostrar mensaje de éxito
+    // Muestro mensaje de éxito cuando se crea la tarea
     function showSuccessMessage() {
-        taskForm.style.display = 'none';
-        successMessage.style.display = 'block';
+        taskForm.style.display = 'none'; // Oculto el formulario
+        successMessage.style.display = 'block'; // Muestro el mensaje de éxito
         successMessage.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Mostrar mensaje de error
+    // Muestro mensaje de error cuando algo sale mal
     function showErrorMessage(details) {
         errorDetails.textContent = details;
         errorMessage.style.display = 'block';
         errorMessage.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Ocultar todos los mensajes
+    // Oculto todos los mensajes
     function hideAllMessages() {
         successMessage.style.display = 'none';
         errorMessage.style.display = 'none';
         validationErrors.style.display = 'none';
     }
 
-    // Manejar estado de carga
+    // Manejo el estado de carga (spinner y botón deshabilitado)
     function setLoadingState(isLoading) {
         if (isLoading) {
             submitText.style.display = 'none';
@@ -210,51 +213,50 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Manejar reintento
+    // Reintento enviar el formulario si hubo error
     function handleRetry() {
         errorMessage.style.display = 'none';
         if (lastFormData) {
-            // Restaurar datos del último intento
+            // Vuelvo a poner los datos que había intentado enviar
             titleInput.value = lastFormData.title;
             descriptionInput.value = lastFormData.description;
             estadoSelect.value = lastFormData.estado;
             prioritySelect.value = lastFormData.priority;
             dueDateInput.value = lastFormData.dueDate;
             
-            // Reenviar formulario
+            // Vuelvo a enviar
             handleFormSubmit(new Event('submit'));
         }
     }
 
-    // Manejar cancelación
+    // Manejo la cancelación del formulario
     function handleCancel() {
         if (confirm('¿Estás seguro de que quieres cancelar? Se perderán los datos no guardados.')) {
             redirectToTasks();
         }
     }
 
-    // Redirigir a la página de tareas
+    // Redirijo a la página de ver tareas
     function redirectToTasks() {
-        window.location.href = 'ejercicio2.html'; // Ajusta la ruta según tu estructura
+        window.location.href = 'ejercicio2.html';
     }
 
-    // Resetear formulario para crear otra tarea
+    // Reseteo el formulario para crear otra tarea
     function resetForm() {
-        taskForm.reset();
+        taskForm.reset(); // Limpio todos los campos
         successMessage.style.display = 'none';
-        taskForm.style.display = 'block';
+        taskForm.style.display = 'block'; // Muestro el formulario otra vez
         
-        // Limpiar errores
+        // Limpio todos los errores
         document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
         document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
         
-        // Scroll al inicio
+        // Vuelvo al inicio de la página
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Función de utilidad para mostrar notificaciones (opcional)
+    // Función para mostrar notificaciones (de momento solo en consola)
     function showNotification(message, type = 'info') {
-        // Podrías implementar notificaciones toast aquí
         console.log(`${type.toUpperCase()}: ${message}`);
     }
 });

@@ -1,16 +1,20 @@
+/* ejercicio4.css - Estilos para la gestión completa de tareas (editar y eliminar) */
+
+/* Variables de colores y estilos que uso en toda la página */
 :root {
-    --primary-color: #4a6fa5;
-    --secondary-color: #6b8cbc;
-    --success-color: #28a745;
-    --danger-color: #dc3545;
-    --warning-color: #ffc107;
-    --light-color: #f8f9fa;
-    --dark-color: #343a40;
-    --border-radius: 8px;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
+    --primary-color: #4a6fa5;      /* Color azul principal */
+    --secondary-color: #6b8cbc;    /* Color azul más claro */
+    --success-color: #28a745;      /* Verde para éxitos */
+    --danger-color: #dc3545;       /* Rojo para errores */
+    --warning-color: #ffc107;      /* Amarillo para advertencias */
+    --light-color: #f8f9fa;        /* Color de fondo claro */
+    --dark-color: #343a40;         /* Color de texto oscuro */
+    --border-radius: 8px;          /* Radio de las esquinas */
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    --transition: all 0.3s ease;   /* Transiciones suaves */
 }
 
+/* Reseteo los estilos por defecto del navegador */
 * {
     margin: 0;
     padding: 0;
@@ -18,19 +22,23 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Estilos generales del body */
 body {
     background-color: #f5f7fa;
     color: #333;
     line-height: 1.6;
 }
 
+/* Contenedor principal que centra todo el contenido */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Header */
+/* ========== ESTILOS DEL HEADER ========== */
+
+/* Cabecera de la página */
 header {
     background-color: white;
     border-radius: var(--border-radius);
@@ -52,6 +60,7 @@ header h1 {
     margin-bottom: 20px;
 }
 
+/* Contenedor de botones en el header */
 .header-actions {
     display: flex;
     gap: 15px;
@@ -59,7 +68,9 @@ header h1 {
     flex-wrap: wrap;
 }
 
-/* Controles */
+/* ========== CONTROLES DE BÚSQUEDA ========== */
+
+/* Controles de búsqueda y actualización */
 .controls {
     display: flex;
     justify-content: space-between;
@@ -73,6 +84,7 @@ header h1 {
     box-shadow: var(--box-shadow);
 }
 
+/* Caja de búsqueda con icono */
 .search-box {
     flex: 1;
     min-width: 250px;
@@ -95,7 +107,9 @@ header h1 {
     color: #777;
 }
 
-/* Botones */
+/* ========== ESTILOS DE BOTONES ========== */
+
+/* Estilos base para todos los botones */
 .btn {
     padding: 10px 20px;
     border: none;
@@ -110,6 +124,7 @@ header h1 {
     text-decoration: none;
 }
 
+/* Botón principal (azul) */
 .btn-primary {
     background-color: var(--primary-color);
     color: white;
@@ -120,6 +135,7 @@ header h1 {
     transform: translateY(-2px);
 }
 
+/* Botón secundario (gris) */
 .btn-secondary {
     background-color: #6c757d;
     color: white;
@@ -130,6 +146,7 @@ header h1 {
     transform: translateY(-2px);
 }
 
+/* Botón de peligro (rojo) */
 .btn-danger {
     background-color: var(--danger-color);
     color: white;
@@ -140,6 +157,7 @@ header h1 {
     transform: translateY(-2px);
 }
 
+/* Botón de advertencia (amarillo) */
 .btn-warning {
     background-color: var(--warning-color);
     color: var(--dark-color);
@@ -150,6 +168,7 @@ header h1 {
     transform: translateY(-2px);
 }
 
+/* Botón de actualizar específico */
 .refresh-btn {
     background-color: var(--primary-color);
     color: white;
@@ -168,13 +187,16 @@ header h1 {
     background-color: var(--secondary-color);
 }
 
-/* Contenedor de Tareas */
+/* ========== CONTENEDOR DE TAREAS ========== */
+
+/* Grid para las tarjetas de tareas */
 .tasks-container {
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 }
 
+/* Tarjeta individual de tarea */
 .task-card {
     background-color: white;
     border-radius: var(--border-radius);
@@ -185,35 +207,39 @@ header h1 {
     position: relative;
 }
 
+/* Efecto hover de la tarjeta */
 .task-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Colores del borde izquierdo según el estado */
 .task-card.pendiente {
-    border-left-color: var(--warning-color);
+    border-left-color: var(--warning-color); /* Amarillo para pendiente */
 }
 
 .task-card.haciendo {
-    border-left-color: var(--primary-color);
+    border-left-color: var(--primary-color); /* Azul para en progreso */
 }
 
 .task-card.completada {
-    border-left-color: var(--success-color);
+    border-left-color: var(--success-color); /* Verde para completada */
 }
 
+/* Colores del borde superior según la prioridad */
 .task-card.alta {
-    border-top: 3px solid var(--danger-color);
+    border-top: 3px solid var(--danger-color); /* Rojo para alta */
 }
 
 .task-card.media {
-    border-top: 3px solid var(--warning-color);
+    border-top: 3px solid var(--warning-color); /* Amarillo para media */
 }
 
 .task-card.baja {
-    border-top: 3px solid var(--success-color);
+    border-top: 3px solid var(--success-color); /* Verde para baja */
 }
 
+/* Cabecera de la tarjeta con título y botones */
 .task-header {
     display: flex;
     justify-content: between;
@@ -230,21 +256,25 @@ header h1 {
     flex: 1;
 }
 
+/* Botones de editar y eliminar */
 .task-actions {
     display: flex;
     gap: 8px;
-    opacity: 0;
+    opacity: 0; /* Ocultos por defecto */
     transition: var(--transition);
 }
 
+/* Mostrar botones al hacer hover */
 .task-card:hover .task-actions {
     opacity: 1;
 }
 
+/* Mostrar botones siempre en modo eliminar */
 .delete-mode .task-actions {
     opacity: 1;
 }
 
+/* Botones de acción (editar y eliminar) */
 .action-btn {
     background: none;
     border: none;
@@ -255,16 +285,19 @@ header h1 {
     font-size: 1.1rem;
 }
 
+/* Efecto hover del botón editar */
 .edit-btn:hover {
     background-color: rgba(74, 111, 165, 0.1);
     color: var(--primary-color);
 }
 
+/* Efecto hover del botón eliminar */
 .delete-btn:hover {
     background-color: rgba(220, 53, 69, 0.1);
     color: var(--danger-color);
 }
 
+/* Descripción de la tarea */
 .task-description {
     color: #555;
     margin-bottom: 15px;
@@ -272,6 +305,7 @@ header h1 {
     min-height: 60px;
 }
 
+/* Metadatos de la tarea (estado, prioridad, fecha) */
 .task-meta {
     display: flex;
     flex-wrap: wrap;
@@ -283,6 +317,7 @@ header h1 {
     color: #777;
 }
 
+/* Badge de estado */
 .task-status {
     display: inline-block;
     padding: 4px 8px;
@@ -292,6 +327,7 @@ header h1 {
     text-transform: uppercase;
 }
 
+/* Colores para los estados */
 .status-pendiente {
     background-color: #fff3cd;
     color: #856404;
@@ -307,6 +343,7 @@ header h1 {
     color: #155724;
 }
 
+/* Badge de prioridad */
 .task-priority {
     display: inline-block;
     padding: 4px 8px;
@@ -316,6 +353,7 @@ header h1 {
     text-transform: uppercase;
 }
 
+/* Colores para las prioridades */
 .priority-alta {
     background-color: #f8d7da;
     color: #721c24;
@@ -331,12 +369,15 @@ header h1 {
     color: #0c5460;
 }
 
+/* Fecha de creación */
 .task-date {
     font-style: italic;
     margin-left: auto;
 }
 
-/* Modales */
+/* ========== MODALES ========== */
+
+/* Fondo del modal */
 .modal {
     display: none;
     position: fixed;
@@ -349,6 +390,7 @@ header h1 {
     animation: fadeIn 0.3s;
 }
 
+/* Contenido del modal */
 .modal-content {
     background-color: white;
     margin: 5% auto;
@@ -360,10 +402,12 @@ header h1 {
     animation: slideIn 0.3s;
 }
 
+/* Modal de eliminación más pequeño */
 .delete-modal {
     max-width: 500px;
 }
 
+/* Cabecera del modal */
 .modal-header {
     display: flex;
     justify-content: space-between;
@@ -377,6 +421,7 @@ header h1 {
     margin: 0;
 }
 
+/* Botón para cerrar el modal */
 .close-btn {
     background: none;
     border: none;
@@ -390,17 +435,21 @@ header h1 {
     color: var(--danger-color);
 }
 
+/* Cuerpo del modal */
 .modal-body {
     padding: 25px;
 }
 
+/* Texto de advertencia en rojo */
 .warning-text {
     color: var(--danger-color);
     font-weight: bold;
     margin-top: 10px;
 }
 
-/* Formularios en Modal */
+/* ========== FORMULARIOS EN MODAL ========== */
+
+/* Formulario dentro del modal */
 .task-form {
     padding: 25px;
 }
@@ -409,6 +458,7 @@ header h1 {
     margin-bottom: 20px;
 }
 
+/* Fila con campos lado a lado */
 .form-row {
     display: flex;
     gap: 15px;
@@ -437,6 +487,7 @@ header h1 {
     transition: var(--transition);
 }
 
+/* Efecto focus en los campos */
 .form-input:focus,
 .form-textarea:focus,
 .form-select:focus {
@@ -450,6 +501,7 @@ header h1 {
     min-height: 100px;
 }
 
+/* Botones del formulario en modal */
 .form-actions,
 .modal-actions {
     display: flex;
@@ -460,6 +512,7 @@ header h1 {
     border-top: 1px solid #eee;
 }
 
+/* Mensajes de error */
 .error-message {
     display: block;
     color: var(--danger-color);
@@ -468,13 +521,16 @@ header h1 {
     min-height: 20px;
 }
 
+/* Campos con error - borde rojo */
 .form-input.error,
 .form-textarea.error,
 .form-select.error {
     border-color: var(--danger-color);
 }
 
-/* Estados de la aplicación */
+/* ========== ESTADOS DE LA APLICACIÓN ========== */
+
+/* Mensajes de estado (loading, error, sin resultados) */
 .loading, .error, .no-results {
     text-align: center;
     padding: 40px;
@@ -493,6 +549,7 @@ header h1 {
     color: #666;
 }
 
+/* Spinner de carga */
 .spinner {
     border: 3px solid #f3f3f3;
     border-top: 3px solid var(--primary-color);
@@ -503,11 +560,13 @@ header h1 {
     margin: 0 auto 20px;
 }
 
+/* Animación del spinner */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
+/* Animaciones para los modales */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -518,23 +577,27 @@ header h1 {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* Modo Eliminar */
+/* ========== MODO ELIMINACIÓN ========== */
+
+/* Estilos cuando está activo el modo eliminar */
 .delete-mode .task-card {
-    border: 2px solid var(--danger-color);
+    border: 2px solid var(--danger-color); /* Borde rojo en todas las tarjetas */
 }
 
 .delete-mode .task-actions {
-    opacity: 1;
+    opacity: 1; /* Mostrar botones siempre */
 }
 
-/* Responsive */
+/* ========== ESTILOS RESPONSIVE ========== */
+
+/* Para tablets y móviles grandes */
 @media (max-width: 768px) {
     .container {
         padding: 15px;
     }
     
     .tasks-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Una columna en móviles */
     }
     
     .controls {
@@ -576,6 +639,7 @@ header h1 {
     }
 }
 
+/* Para móviles pequeños */
 @media (max-width: 480px) {
     header h1 {
         font-size: 1.8rem;

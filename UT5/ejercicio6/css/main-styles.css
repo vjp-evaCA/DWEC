@@ -1,31 +1,36 @@
-/* css/main-styles.css */
+/* main-styles.css - Estilos generales que uso en todas las páginas */
+
+/* Variables de colores y estilos */
 :root {
-    --primary-color: #4a6fa5;
-    --secondary-color: #6b8cbc;
-    --success-color: #28a745;
-    --danger-color: #dc3545;
-    --warning-color: #ffc107;
-    --light-color: #f8f9fa;
-    --dark-color: #343a40;
-    --border-radius: 8px;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
+    --primary-color: #4a6fa5;      /* Color azul principal */
+    --secondary-color: #6b8cbc;    /* Color azul secundario */
+    --success-color: #28a745;      /* Verde para éxitos */
+    --danger-color: #dc3545;       /* Rojo para errores */
+    --warning-color: #ffc107;      /* Amarillo para advertencias */
+    --light-color: #f8f9fa;        /* Color claro */
+    --dark-color: #343a40;         /* Color oscuro */
+    --border-radius: 8px;          /* Radio de esquinas */
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    --transition: all 0.3s ease;   /* Transiciones suaves */
 }
 
+/* Variables para modo oscuro */
 [data-theme="dark"] {
-    --bg-color: #1a1a1a;
-    --text-color: #ffffff;
-    --card-bg: #2d2d2d;
-    --border-color: #404040;
+    --bg-color: #1a1a1a;        /* Fondo oscuro */
+    --text-color: #ffffff;      /* Texto blanco */
+    --card-bg: #2d2d2d;         /* Fondo de tarjetas oscuro */
+    --border-color: #404040;    /* Bordes oscuros */
 }
 
+/* Variables para modo claro */
 [data-theme="light"] {
-    --bg-color: #f5f7fa;
-    --text-color: #333333;
-    --card-bg: #ffffff;
-    --border-color: #e0e0e0;
+    --bg-color: #f5f7fa;        /* Fondo claro */
+    --text-color: #333333;      /* Texto oscuro */
+    --card-bg: #ffffff;         /* Fondo de tarjetas blanco */
+    --border-color: #e0e0e0;    /* Bordes claros */
 }
 
+/* Reseteo básico */
 * {
     margin: 0;
     padding: 0;
@@ -33,97 +38,109 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Estilos del body que cambian con el tema */
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: var(--bg-color);      /* Fondo */
+    color: var(--text-color);               /* Color de texto */
+    line-height: 1.6;                       /* Espaciado entre líneas */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave al cambiar tema */
 }
 
+/* Contenedor principal que centra el contenido */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 30px 20px;
+    max-width: 1200px;    /* Ancho máximo */
+    margin: 0 auto;       /* Centrado */
+    padding: 30px 20px;   /* Espaciado interno */
 }
 
+/* Cabecera de página (no confundir con la cabecera de navegación) */
 .page-header {
-    text-align: center;
-    margin-bottom: 40px;
+    text-align: center;   /* Texto centrado */
+    margin-bottom: 40px;  /* Espacio debajo */
 }
 
 .page-header h1 {
-    color: var(--primary-color);
-    margin-bottom: 10px;
-    font-size: 2.5rem;
+    color: var(--primary-color);  /* Color azul */
+    margin-bottom: 10px;          /* Espacio debajo */
+    font-size: 2.5rem;            /* Tamaño grande */
 }
 
 .page-header p {
-    color: var(--text-color);
-    opacity: 0.8;
-    font-size: 1.1rem;
+    color: var(--text-color);     /* Color que cambia con tema */
+    opacity: 0.8;                 /* Un poco transparente */
+    font-size: 1.1rem;            /* Tamaño un poco más grande */
 }
 
+/* ========== ESTILOS DE BOTONES ========== */
+
+/* Estilos base para todos los botones */
 .btn {
-    padding: 12px 24px;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
+    padding: 12px 24px;           /* Espaciado interno */
+    border: none;                 /* Sin borde */
+    border-radius: var(--border-radius); /* Esquinas redondeadas */
+    font-size: 1rem;              /* Tamaño de texto */
+    font-weight: 600;             /* Texto en negrita */
+    cursor: pointer;              /* Manito al pasar */
+    transition: var(--transition); /* Transiciones suaves */
+    display: inline-flex;         /* Flex para iconos */
+    align-items: center;          /* Centrado vertical */
+    gap: 8px;                     /* Espacio entre icono y texto */
+    text-decoration: none;        /* Sin subrayado en enlaces */
 }
 
+/* Botón principal (azul) */
 .btn-primary {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--primary-color); /* Fondo azul */
+    color: white;                           /* Texto blanco */
 }
 
 .btn-primary:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
+    background-color: var(--secondary-color); /* Azul más claro */
+    transform: translateY(-2px);             /* Se levanta un poco */
 }
 
+/* Botón secundario (gris) */
 .btn-secondary {
-    background-color: #6c757d;
-    color: white;
+    background-color: #6c757d;    /* Fondo gris */
+    color: white;                 /* Texto blanco */
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
-    transform: translateY(-2px);
+    background-color: #5a6268;    /* Gris más oscuro */
+    transform: translateY(-2px);  /* Se levanta un poco */
 }
 
+/* Botón con borde (outline) */
 .btn-outline {
-    background-color: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    background-color: transparent;     /* Sin fondo */
+    border: 2px solid var(--primary-color); /* Borde azul */
+    color: var(--primary-color);       /* Texto azul */
 }
 
 .btn-outline:hover {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--primary-color); /* Fondo azul al pasar */
+    color: white;                         /* Texto blanco */
 }
 
+/* Botón grande */
 .btn-large {
-    padding: 15px 30px;
-    font-size: 1.1rem;
+    padding: 15px 30px;    /* Más padding */
+    font-size: 1.1rem;     /* Texto más grande */
 }
 
-/* Responsive */
+/* ========== RESPONSIVE ========== */
+
+/* Para tablets y móviles */
 @media (max-width: 768px) {
     .container {
-        padding: 20px 15px;
+        padding: 20px 15px;  /* Menos padding */
     }
 
     .page-header h1 {
-        font-size: 2rem;
+        font-size: 2rem;  /* Título más pequeño */
     }
 
     .btn {
-        padding: 10px 20px;
+        padding: 10px 20px;  /* Botones más pequeños */
     }
 }

@@ -1,41 +1,47 @@
-// js/app.js
+// app.js - Utilidades globales para toda la aplicación
+
 class TaskManagerApp {
     constructor() {
-        this.init();
+        this.init();  // Inicializo cuando se crea la clase
     }
 
     init() {
-        this.loadTheme();
-        this.setupGlobalEvents();
+        this.loadTheme();          // Cargo el tema guardado
+        this.setupGlobalEvents();  // Configuro eventos globales
     }
 
+    // Cargo el tema desde localStorage o uso 'light' por defecto
     loadTheme() {
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.body.setAttribute('data-theme', savedTheme);
     }
 
+    // Configuro eventos que se usan en toda la aplicación
     setupGlobalEvents() {
-        // Navegación global
+        // Navegación global para enlaces con data-navigation
         document.addEventListener('click', (e) => {
             if (e.target.matches('[data-navigation]')) {
-                e.preventDefault();
+                e.preventDefault();  // Evito que navegue normal
                 this.handleNavigation(e.target.getAttribute('href'));
             }
         });
 
-        // Gestión de errores global
+        // Manejo errores globales de JavaScript
         window.addEventListener('error', this.handleGlobalError);
     }
 
+    // Manejo la navegación con transición
     handleNavigation(url) {
-        // Mostrar loader de transición
+        // Muestro una transición de página
         this.showPageTransition();
         
+        // Después de un momento, navego a la URL
         setTimeout(() => {
             window.location.href = url;
         }, 300);
     }
 
+    // Muestro una transición cuando cambias de página
     showPageTransition() {
         const transition = document.createElement('div');
         transition.id = 'page-transition';
@@ -54,25 +60,31 @@ class TaskManagerApp {
         document.body.appendChild(transition);
     }
 
+    // Manejo errores globales (por si algo sale mal)
     handleGlobalError(error) {
         console.error('Error global:', error);
-        // Podrías mostrar una notificación al usuario
+        // Aquí podrías mostrar una notificación al usuario
     }
 
-    // Utilidades globales
+    // ========== FUNCIONES ESTÁTICAS (se pueden usar sin crear la clase) ==========
+
+    // Muestro notificaciones toast en la pantalla
     static showNotification(message, type = 'info') {
-        // Implementación de notificaciones toast
+        // Creo el elemento de notificación
         const notification = document.createElement('div');
         notification.className = `global-notification ${type}`;
         notification.textContent = message;
         
+        // Lo añado al body
         document.body.appendChild(notification);
         
+        // Lo quito después de 3 segundos
         setTimeout(() => {
             notification.remove();
         }, 3000);
     }
 
+    // Formateo fechas para mostrarlas bonitas
     static formatDate(dateString) {
         return new Date(dateString).toLocaleDateString('es-ES', {
             year: 'numeric',
@@ -84,7 +96,7 @@ class TaskManagerApp {
     }
 }
 
-// Inicializar la aplicación
+// Inicializo la aplicación cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
     new TaskManagerApp();
 });

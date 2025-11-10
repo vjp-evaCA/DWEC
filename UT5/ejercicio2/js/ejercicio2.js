@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Estos son todos los elementos del HTML que voy a usar
     const tasksContainer = document.getElementById('tasksContainer');
     const loadingMessage = document.getElementById('loadingMessage');
     const errorMessage = document.getElementById('errorMessage');
@@ -7,55 +8,67 @@ document.addEventListener('DOMContentLoaded', function () {
     const refreshBtn = document.getElementById('refreshBtn');
     const showExampleBtn = document.getElementById('showExampleBtn');
 
+    // Aquí guardo todas las tareas
     let allTasks = [];
 
-    // Cargar tareas al iniciar
+    // Cuando se carga la página, llamo a esta función para cargar las tareas
     loadTasks();
 
-    // Configurar eventos
+    // Pongo los event listeners para que los botones funcionen
     searchInput.addEventListener('input', filterTasks);
     refreshBtn.addEventListener('click', loadTasks);
     if (showExampleBtn) {
         showExampleBtn.addEventListener('click', showExampleData);
     }
 
-    // Función para cargar tareas desde la API
+    // Esta función trae las tareas del servidor
     async function loadTasks() {
+        // Muestro el mensaje de cargando
         showLoading();
+        // Oculto los mensajes de error por si acaso
         hideError();
         hideNoResults();
 
         try {
+            // Hago la petición al servidor
             const response = await fetch('http://localhost:3000/tasks');
 
+            // Si el servidor responde con error, lanzo un error
             if (!response.ok) {
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
             }
 
+            // Convierto la respuesta a JSON
             allTasks = await response.json();
+            // Muestro las tareas en pantalla
             displayTasks(allTasks);
+            // Quito el mensaje de cargando
             hideLoading();
         } catch (error) {
+            // Si hay error, lo muestro en consola y muestro el mensaje de error
             console.error('Error al cargar las tareas:', error);
             showError();
             hideLoading();
         }
     }
 
-    // Función para mostrar las tareas en tarjetas
+    // Esta función pinta las tareas en el HTML
     function displayTasks(tasks) {
+        // Limpio el contenedor por si había tareas antes
         tasksContainer.innerHTML = '';
 
+        // Si no hay tareas, muestro el mensaje de "no hay resultados"
         if (tasks.length === 0) {
             showNoResults();
             return;
         }
 
+        // Por cada tarea, creo una tarjeta y la añado al contenedor
         tasks.forEach(task => {
             const taskCard = document.createElement('div');
             taskCard.className = 'task-card';
 
-            // Formatear fecha
+            // Formateo la fecha para que se vea bien
             const taskDate = task.date ? new Date(task.date).toLocaleDateString('es-ES', {
                 year: 'numeric',
                 month: 'long',
@@ -64,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 minute: '2-digit'
             }) : 'Fecha no disponible';
 
+            // Creo el HTML de la tarjeta de tarea
             taskCard.innerHTML = `
                         <div class="task-title">${task.title || 'Sin título'}</div>
                         <div class="task-description">${task.description || 'Sin descripción'}</div>
@@ -73,16 +87,19 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     `;
 
+            // Añado la tarjeta al contenedor
             tasksContainer.appendChild(taskCard);
         });
     }
 
-    // Función para filtrar tareas
+    // Esta función filtra las tareas cuando el usuario busca
     function filterTasks() {
+        // Obtengo lo que el usuario está buscando
         const searchTerm = searchInput.value.toLowerCase();
 
+        // Filtro las tareas que coincidan con la búsqueda
         const filteredTasks = allTasks.filter(task => {
-            // Filtrar por término de búsqueda
+            // Busco en el título, descripción y autor
             const matchesSearch =
                 (task.title && task.title.toLowerCase().includes(searchTerm)) ||
                 (task.description && task.description.toLowerCase().includes(searchTerm)) ||
@@ -91,16 +108,19 @@ document.addEventListener('DOMContentLoaded', function () {
             return matchesSearch;
         });
 
+        // Muestro las tareas filtradas
         displayTasks(filteredTasks);
     }
 
-    // Función para mostrar datos de ejemplo
+    // Esta función muestra datos de ejemplo si el servidor no funciona
     function showExampleData() {
+        // Oculto el error y muestro cargando
         hideError();
         showLoading();
 
-        // Simular una respuesta del servidor con datos de ejemplo
+        // Pongo un timeout para simular que está cargando
         setTimeout(() => {
+            // Estos son datos de ejemplo
             allTasks = [
                 {
                     title: "Tareas en el servidor",
@@ -140,33 +160,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             ];
 
+            // Muestro los datos de ejemplo
             displayTasks(allTasks);
             hideLoading();
         }, 800);
     }
 
-    // Funciones auxiliares para mostrar/ocultar mensajes
+    // ========== FUNCIONES PARA MOSTRAR/OCULTAR MENSAJES ==========
+
+    // Muestro el mensaje de cargando
     function showLoading() {
         loadingMessage.style.display = 'block';
         tasksContainer.innerHTML = '';
     }
 
+    // Oculto el mensaje de cargando
     function hideLoading() {
         loadingMessage.style.display = 'none';
     }
 
+    // Muestro el mensaje de error
     function showError() {
         errorMessage.style.display = 'block';
     }
 
+    // Oculto el mensaje de error
     function hideError() {
         errorMessage.style.display = 'none';
     }
 
+    // Muestro el mensaje de "no hay resultados"
     function showNoResults() {
         noResultsMessage.style.display = 'block';
     }
 
+    // Oculto el mensaje de "no hay resultados"
     function hideNoResults() {
         noResultsMessage.style.display = 'none';
     }

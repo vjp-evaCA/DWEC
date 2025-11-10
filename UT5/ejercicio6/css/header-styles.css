@@ -1,15 +1,18 @@
-/* css/header-styles.css */
+/* header-styles.css - Estilos para la cabecera que se usa en todas las páginas */
+
+/* Defino los colores para el modo claro y oscuro */
 :root {
-    --header-bg-light: #ffffff;
-    --header-bg-dark: #1a1a1a;
-    --text-light: #333333;
-    --text-dark: #ffffff;
-    --nav-hover-light: #4a6fa5;
-    --nav-hover-dark: #6b8cbc;
-    --border-light: #e0e0e0;
-    --border-dark: #333333;
+    --header-bg-light: #ffffff;      /* Fondo blanco para modo claro */
+    --header-bg-dark: #1a1a1a;       /* Fondo oscuro para modo oscuro */
+    --text-light: #333333;           /* Texto oscuro para modo claro */
+    --text-dark: #ffffff;            /* Texto blanco para modo oscuro */
+    --nav-hover-light: #4a6fa5;      /* Azul para hover en modo claro */
+    --nav-hover-dark: #6b8cbc;       /* Azul claro para hover en modo oscuro */
+    --border-light: #e0e0e0;         /* Borde gris para modo claro */
+    --border-dark: #333333;          /* Borde oscuro para modo oscuro */
 }
 
+/* Cuando el tema es oscuro, uso las variables oscuras */
 [data-theme="dark"] {
     --header-bg: var(--header-bg-dark);
     --text-color: var(--text-dark);
@@ -17,6 +20,7 @@
     --border-color: var(--border-dark);
 }
 
+/* Cuando el tema es claro, uso las variables claras */
 [data-theme="light"] {
     --header-bg: var(--header-bg-light);
     --text-color: var(--text-light);
@@ -24,123 +28,136 @@
     --border-color: var(--border-light);
 }
 
+/* La cabecera principal que se queda fija arriba */
 .main-header {
-    background-color: var(--header-bg);
-    border-bottom: 2px solid var(--border-color);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: all 0.3s ease;
+    background-color: var(--header-bg);      /* Fondo que cambia con el tema */
+    border-bottom: 2px solid var(--border-color); /* Borde abajo */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);   /* Sombra suave */
+    position: sticky;  /* Se queda pegada arriba al hacer scroll */
+    top: 0;           /* Pegada al tope */
+    z-index: 1000;    /* Para que esté por encima de todo */
+    transition: all 0.3s ease;  /* Transiciones suaves */
 }
 
+/* Contenedor del contenido de la cabecera */
 .header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
+    max-width: 1200px;    /* Ancho máximo */
+    margin: 0 auto;       /* Centrado */
+    padding: 0 20px;      /* Espaciado a los lados */
+    display: flex;        /* Flexbox para alinear items */
+    justify-content: space-between; /* Logo a la izquierda, navegación al centro, acciones a la derecha */
+    align-items: center;  /* Centrado vertical */
+    height: 70px;         /* Altura fija */
 }
 
+/* Estilos del logo */
 .logo h1 {
-    color: var(--text-color);
-    font-size: 1.5rem;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    color: var(--text-color);  /* Color que cambia con el tema */
+    font-size: 1.5rem;         /* Tamaño del texto */
+    margin: 0;                 /* Sin margen */
+    display: flex;             /* Flex para el icono y texto */
+    align-items: center;       /* Centrado vertical */
+    gap: 10px;                 /* Espacio entre icono y texto */
 }
 
+/* Navegación principal */
 .navigation {
-    flex: 1;
-    margin: 0 40px;
+    flex: 1;          /* Ocupa el espacio disponible */
+    margin: 0 40px;   /* Margen a los lados */
 }
 
+/* Lista de navegación */
 .nav-list {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 5px;
+    display: flex;        /* En línea */
+    list-style: none;     /* Sin puntos de lista */
+    margin: 0;            /* Sin margen */
+    padding: 0;           /* Sin padding */
+    gap: 5px;             /* Espacio entre items */
 }
 
 .nav-item {
-    margin: 0;
+    margin: 0;  /* Sin margen */
 }
 
+/* Enlaces de navegación */
 .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    text-decoration: none;
-    color: var(--text-color);
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    border: 2px solid transparent;
+    display: flex;           /* Flex para icono y texto */
+    align-items: center;     /* Centrado vertical */
+    gap: 8px;                /* Espacio entre icono y texto */
+    padding: 12px 20px;      /* Espaciado interno */
+    text-decoration: none;   /* Sin subrayado */
+    color: var(--text-color); /* Color que cambia con el tema */
+    border-radius: 25px;     /* Esquinas muy redondeadas */
+    transition: all 0.3s ease; /* Transiciones suaves */
+    font-weight: 500;        /* Peso de fuente */
+    border: 2px solid transparent; /* Borde transparente por defecto */
 }
 
+/* Efecto cuando pasas el mouse sobre un enlace */
 .nav-link:hover {
-    background-color: var(--nav-hover);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: var(--nav-hover);  /* Fondo azul */
+    color: white;                        /* Texto blanco */
+    transform: translateY(-2px);         /* Se levanta un poco */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra */
 }
 
+/* Enlace activo (de la página actual) */
 .nav-link.active {
-    background-color: var(--nav-hover);
-    color: white;
-    border-color: var(--nav-hover);
+    background-color: var(--nav-hover);  /* Mismo color que hover */
+    color: white;                        /* Texto blanco */
+    border-color: var(--nav-hover);      /* Borde del mismo color */
 }
 
+/* Contenedor de acciones (botón de tema) */
 .header-actions {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+    display: flex;      /* En línea */
+    gap: 10px;          /* Espacio entre botones */
+    align-items: center; /* Centrado vertical */
 }
 
-/* Responsive */
+/* ========== ESTILOS RESPONSIVE ========== */
+
+/* Para tablets y móviles */
 @media (max-width: 768px) {
     .header-content {
-        flex-direction: column;
-        height: auto;
-        padding: 15px 20px;
-        gap: 15px;
+        flex-direction: column;  /* En columna */
+        height: auto;            /* Altura automática */
+        padding: 15px 20px;      /* Más padding */
+        gap: 15px;               /* Espacio entre elementos */
     }
 
     .navigation {
-        margin: 0;
-        width: 100%;
+        margin: 0;      /* Sin margen */
+        width: 100%;    /* Ancho completo */
     }
 
     .nav-list {
-        justify-content: center;
-        flex-wrap: wrap;
+        justify-content: center;  /* Centrado */
+        flex-wrap: wrap;          /* Puede hacer wrap */
     }
 
     .nav-link {
-        padding: 10px 15px;
-        font-size: 0.9rem;
+        padding: 10px 15px;  /* Menos padding */
+        font-size: 0.9rem;   /* Texto más pequeño */
     }
 
     .logo h1 {
-        font-size: 1.3rem;
+        font-size: 1.3rem;  /* Logo más pequeño */
     }
 }
 
+/* Para móviles pequeños */
 @media (max-width: 480px) {
     .nav-list {
-        gap: 2px;
+        gap: 2px;  /* Menos espacio entre items */
     }
 
     .nav-link {
-        padding: 8px 12px;
-        font-size: 0.8rem;
+        padding: 8px 12px;    /* Menos padding */
+        font-size: 0.8rem;    /* Texto más pequeño */
     }
 
+    /* En móviles muy pequeños, oculto los textos y solo muestro iconos */
     .nav-link span {
         display: none;
     }
