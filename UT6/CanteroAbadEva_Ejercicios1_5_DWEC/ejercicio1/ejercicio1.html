@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Geolocalización</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/ejercicio1.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📍 Ejercicio 1: Geolocalización</h1>
+            <p class="subtitle">IES Valle del Jerte - Actualización cada 30 segundos</p>
+        </header>
+        
+        <div id="map"></div>
+        
+        <div class="info">
+            <div class="coordenadas">
+                <h3>Coordenadas actuales:</h3>
+                <div class="coord-box">
+                    <p>Latitud: <span id="lat">40.043021</span></p>
+                    <p>Longitud: <span id="lng">-6.086801</span></p>
+                </div>
+            </div>
+            
+            <div class="actualizacion">
+                <h3>Información de actualización:</h3>
+                <div class="update-box">
+                    <p>Última actualización: <span id="last-update">--:--:--</span></p>
+                    <p>Contador: <span id="counter">0</span> actualizaciones</p>
+                    <p>Próxima en: <span id="next-update">30</span> segundos</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Ejercicio 1 - Mapa con geolocalización y actualización automática</p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/ejercicio1.js"></script>
+</body>
+</html>
