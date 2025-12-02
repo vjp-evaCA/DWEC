@@ -1,0 +1,642 @@
+{
+    "head": {
+        "link": [],
+        "vars": [
+            "uri",
+            "geo_long",
+            "schema_url",
+            "geo_lat",
+            "schema_email",
+            "schema_telephone",
+            "rdfs_label",
+            "om_capacidadPersonas",
+            "om_sirveComida",
+            "schema_address_streetAddress",
+            "schema_address_addressLocality",
+            "schema_address_addressCountry",
+            "schema_address_postalCode"
+        ]
+    },
+    "results": {
+        "distinct": false,
+        "ordered": true,
+        "bindings": [
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/5-farmacia-legend"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.370867"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.475652"
+                },
+                "schema_email": {
+                    "type": "literal",
+                    "value": "laminervatapas@gmail.com"
+                },
+                "schema_telephone": {
+                    "type": "literal",
+                    "value": "+34 927261052"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Farmacia Legend"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "No"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Plaza Mayor, 20"
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10003"
+                }
+            },
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/11-sala-barroco"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.379866"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.473252"
+                },
+                "schema_email": {
+                    "type": "literal",
+                    "value": "barroconoche@hotmail.com"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Sala Barroco"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "No"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Plaza de Albatros, 12"
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10001"
+                }
+            },
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/9-manometro"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.377899"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.471431"
+                },
+                "schema_email": {
+                    "type": "literal",
+                    "value": "info@manometro.es"
+                },
+                "schema_telephone": {
+                    "type": "literal",
+                    "value": "+34 927220614"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Man\u00F3metro"
+                },
+                "om_capacidadPersonas": {
+                    "type": "literal",
+                    "value": "40 pax"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "S\u00ED"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Avenida de Espa\u00F1a, 6 "
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10001"
+                }
+            },
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/1-boogaloo"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.378637"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.474189"
+                },
+                "schema_email": {
+                    "type": "literal",
+                    "value": "djbarry69@yahoo.es"
+                },
+                "schema_telephone": {
+                    "type": "literal",
+                    "value": "+34 617604471"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Boogaloo"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "No"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Avenida Hern\u00E1n Cort\u00E9s, 10 bajo 5"
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10003"
+                }
+            },
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/7-lambretta"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.380953"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.473158"
+                },
+                "schema_email": {
+                    "type": "literal",
+                    "value": "jesuslucianom@gmail.com"
+                },
+                "schema_telephone": {
+                    "type": "literal",
+                    "value": "+34 677480372"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Lambretta"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "No"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Venecia, 2"
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10001"
+                }
+            },
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/3-el-corral-de-las-cig\u00FCenas"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.370927"
+                },
+                "schema_url": {
+                    "type": "uri",
+                    "value": "http://elcorralcc.com/"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.474192"
+                },
+                "schema_email": {
+                    "type": "literal",
+                    "value": "luis@elcorralcc.com"
+                },
+                "schema_telephone": {
+                    "type": "literal",
+                    "value": "927216425-647758245"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "El Corral de las Cig\u00FCe\u00F1as"
+                },
+                "om_capacidadPersonas": {
+                    "type": "literal",
+                    "value": "62 pax"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "S\u00ED"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Cuesta de Aldana, 6"
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10003"
+                }
+            },
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/0-atico-club-atico-chillout"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.38543"
+                },
+                "schema_url": {
+                    "type": "uri",
+                    "value": "http://www.aticoclub.com"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.467515"
+                },
+                "schema_email": {
+                    "type": "literal",
+                    "value": "general@aticoclub.com"
+                },
+                "schema_telephone": {
+                    "type": "literal",
+                    "value": "+34 639858897"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "\u00C1tico Club-\u00C1tico Chillout"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "No"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Avenida Virgen de Guadalupe, 41-43"
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10005"
+                }
+            },
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/6-la-traviata"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.373483"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.472612"
+                },
+                "schema_email": {
+                    "type": "literal",
+                    "value": "expolatraviatacc@gmail.com"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "La Traviata"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "No"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Sergio S\u00E1nchez, 8"
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10003"
+                }
+            },
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/2-bulevar"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.373759"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.472559"
+                },
+                "schema_email": {
+                    "type": "literal",
+                    "value": "correobelleart@gmail.com"
+                },
+                "schema_telephone": {
+                    "type": "literal",
+                    "value": "+34 686244000"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Bulevar"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "No"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Donoso Cort\u00E9s, 2"
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10003"
+                }
+            },
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/8-las-claras"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.371898"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.471787"
+                },
+                "schema_telephone": {
+                    "type": "literal",
+                    "value": "+34 618402756"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Las Claras"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "No"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Plaza de la Soledad, S/N"
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10003"
+                }
+            },
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/10-maria-mandiles"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.373419"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.472625"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Maria Mandiles"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "No"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Sergio S\u00E1nchez, 7"
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10003"
+                }
+            },
+            {
+                "uri": {
+                    "type": "uri",
+                    "value": "http://opendata.caceres.es/recurso/turismo/establecimientos/BarCopas/4-el-pequeno-gin"
+                },
+                "geo_long": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "-6.37325"
+                },
+                "geo_lat": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+                    "value": "39.472202"
+                },
+                "schema_telephone": {
+                    "type": "literal",
+                    "value": "+34 927761574"
+                },
+                "rdfs_label": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "El Peque\u00F1o Gin"
+                },
+                "om_sirveComida": {
+                    "type": "literal",
+                    "value": "No"
+                },
+                "schema_address_streetAddress": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "Pizarro, 5"
+                },
+                "schema_address_addressLocality": {
+                    "type": "literal",
+                    "xml:lang": "es",
+                    "value": "C\u00E1ceres"
+                },
+                "schema_address_addressCountry": {
+                    "type": "literal",
+                    "value": "ES"
+                },
+                "schema_address_postalCode": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#int",
+                    "value": "10003"
+                }
+            }
+        ]
+    }
+}
