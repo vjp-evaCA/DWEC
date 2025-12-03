@@ -1,80 +1,35 @@
-// Inicializar el mapa centrado en Plasencia
-const map = L.map('map').setView([40.0305, -6.0883], 14);
+// 1. Crear mapa en Cáceres
+var map = L.map('map').setView([39.475, -6.37], 14);
 
-// Añadir capa de OpenStreetMap
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+// 2. Añadir mapa base
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
 }).addTo(map);
 
-// Coordenadas aproximadas de los lugares (basadas en ubicaciones típicas)
-const locations = {
-    ayuntamiento: {
-        coords: [40.02995343043314, -6.0897410698312715],
-        type: "marker",
-        title: "Ayuntamiento de Plasencia",
-        description: "Edificio histórico que alberga la sede del gobierno municipal de Plasencia. Se encuentra en la Plaza Mayor, corazón de la ciudad.",
-        link: "https://www.plasencia.es"
-    },
-    piscinaBioclimatica: {
-        coords: [40.04495498185886, -6.085113671003055],
-        type: "circle",
-        title: "Piscina Bioclimática",
-        description: "Instalación deportiva y de ocio con piscina climatizada que aprovecha las condiciones ambientales para optimizar el consumo energético.",
-        link: "https://www.plasencia.es/turismo/que-ver/piscina-bioclimatica",
-        radius: 50 // Radio en metros
-    },
-    instituto: {
-        coords: [
-    [40.04335850597098, -6.087055726425818],
-    [40.04335850597098, -6.086555726425818],
-    [40.04291850597098, -6.086555726425818],
-    [40.04291850597098, -6.087055726425818],
-    [40.04335850597098, -6.087055726425818]
-],
-        type: "polygon",
-        title: "IES Valle del Jerte",
-        description: "Instituto de Educación Secundaria ubicado en Plasencia. Ofrece formación en ESO, Bachillerato y ciclos formativos.",
-        link: "https://iesvallejertepla.educarex.es"
-    },
-    estacionTren: {  
-        coords: [
-    [40.02240989977747, -6.099712769043673],
-    [40.02240989977747, -6.099212769043673],
-    [40.02196989977747, -6.099212769043673],
-    [40.02196989977747, -6.099712769043673],
-    [40.02240989977747, -6.099712769043673]
-],
-        type: "polygon",
-        title: "Estación de Trenes de Plasencia",
-        description: "Estación ferroviaria que conecta Plasencia con otras ciudades de la región. Ofrece servicios de media distancia.",
-        link: "https://www.renfe.com"
-    }
-};
+// 3. TODOS los bares del JSON
+var bares = [
+    // Copia exacta de cada bar del JSON
+    {nombre: "Farmacia Legend", telefono: "+34 927261052", comida: "No", lat: 39.475652, lng: -6.370867},
+    {nombre: "Sala Barroco", telefono: "No disponible", comida: "No", lat: 39.473252, lng: -6.379866},
+    {nombre: "Manómetro", telefono: "+34 927220614", comida: "Sí", lat: 39.471431, lng: -6.377899},
+    {nombre: "Boogaloo", telefono: "+34 617604471", comida: "No", lat: 39.474189, lng: -6.378637},
+    {nombre: "Lambretta", telefono: "+34 677480372", comida: "No", lat: 39.473158, lng: -6.380953},
+    {nombre: "El Corral de las Cigüeñas", telefono: "927216425-647758245", comida: "Sí", lat: 39.474192, lng: -6.370927},
+    {nombre: "Ático Club-Ático Chillout", telefono: "+34 639858897", comida: "No", lat: 39.467515, lng: -6.38543},
+    {nombre: "La Traviata", telefono: "No disponible", comida: "No", lat: 39.472612, lng: -6.373483},
+    {nombre: "Bulevar", telefono: "+34 686244000", comida: "No", lat: 39.472559, lng: -6.373759},
+    {nombre: "Las Claras", telefono: "+34 618402756", comida: "No", lat: 39.471787, lng: -6.371898},
+    {nombre: "Maria Mandiles", telefono: "No disponible", comida: "No", lat: 39.472625, lng: -6.373419},
+    {nombre: "El Pequeño Gin", telefono: "+34 927761574", comida: "No", lat: 39.472202, lng: -6.37325}
+];
 
-// Función para crear popup HTML
-function createPopupHTML(location) {
-    let color = '#3498db'; // Color por defecto
-    
-    if (location.type === "marker") {
-        color = '#e74c3c';
-    } 
-    
-    return `
-        <h3 style="margin-top: 0; color: ${color}; border-bottom: 2px solid ${color}; padding-bottom: 5px;">${location.title}</h3>
-        <p>${location.description}</p>
-        <a href="${location.link}" target="_blank" class="popup-link">Visitar sitio web</a>
-    `;
-}
-
-// Crear marcador para el ayuntamiento
-const ayuntamientoMarker = L.marker(locations.ayuntamiento.coords)
-    .bindPopup(createPopupHTML(locations.ayuntamiento))
-    .addTo(map);
-
-
-
-// Ajustar el mapa para mostrar todos los elementos
-const allLayers = [ayuntamientoMarker, piscinaCircle, institutoPolygon, estacionPolygon];
-const group = L.featureGroup(allLayers);
-map.fitBounds(group.getBounds().pad(0.1));
+// 4. Añadir marcadores
+bares.forEach(function(bar) {
+    L.marker([bar.lat, bar.lng])
+        .addTo(map)
+        .bindPopup(
+            "<b>" + bar.nombre + "</b><br>" +
+            "Tel: " + bar.telefono + "<br>" +
+            "Comida: " + bar.comida
+        );
+});
