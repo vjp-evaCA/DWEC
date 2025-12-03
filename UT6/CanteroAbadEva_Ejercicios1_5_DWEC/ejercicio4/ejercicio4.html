@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Edades</title>
+    <link rel="stylesheet" href="css/ejercicio4.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Usuarios y Edades</h1>
+        <p>Introduce tu nombre para consultar o registrar tu edad.</p>
+        
+        <div class="form-section">
+            <div class="input-group">
+                <input type="text" id="nameInput" placeholder="Nombre">
+                <button id="searchBtn">Consultar</button>
+            </div>
+            
+            <div id="userDataSection" class="hidden">
+                <p id="userMessage"></p>
+                <div class="input-group">
+                    <input type="number" id="ageInput" placeholder="Edad">
+                    <button id="saveBtn">Guardar</button>
+                    <button id="cancelBtn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="users-section">
+            <h2>Usuarios Registrados</h2>
+            <button id="clearAllBtn">Limpiar Todos</button>
+            <div id="usersList">
+                <p class="empty-message">No hay usuarios registrados.</p>
+            </div>
+            <div class="stats">
+                <p>Total: <span id="totalUsers">0</span> usuarios</p>
+                <p>Edad promedio: <span id="averageAge">0</span></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/ejercicio4.js"></script>
+</body>
+</html>
