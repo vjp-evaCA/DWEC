@@ -1,11 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 5</title>
+    <title>Ejercicio 5 - Administrador de Productos</title>
+    <link rel="stylesheet" href="css/ej5.1.css">
 </head>
 <body>
-    
+    <div class="container">
+        <header>
+            <h1>Administrador de Productos</h1>
+            <p class="subtitle">Gestión del almacén de la tienda online</p>
+        </header>
+
+        <main>
+        <!-- Vamos a añadir un nuevo producto -->
+            <section class="product-form">
+                <h2> Añadir Nuevo Producto</h2>
+                <form id="productForm">
+                    <div class="form-group">
+                        <label for="item">Nombre del artículo:</label>
+                        <input type="text" id="item" placeholder="Ej: Laptop, Smartphone, etc." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad en stock:</label>
+                        <input type="number" id="cantidad" min="0" placeholder="Ej: 10" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="precioUnidad">Precio por unidad (€):</label>
+                        <input type="number" id="precioUnidad" min="0" step="0.01" placeholder="Ej: 299.99" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="marca">Marca del producto:</label>
+                        <input type="text" id="marca" placeholder="Ej: Sony, Samsung, etc." required>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">Añadir Producto</button>
+                        <button type="button" id="clearForm" class="btn btn-secondary">Limpiar Formulario</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Productos que hay en el almacén -->
+            <section class="product-list">
+                <h2>Productos en Almacén</h2>
+                <div class="table-container">
+                    <table id="productsTable">
+                        <thead>
+                            <tr>
+                                <th>Artículo</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unitario</th>
+                                <th>Marca</th>
+                                <th>Valor Total</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <!-- Los productos se insertarán aquí dinámicamente -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" class="total-label"><strong>Valor total del inventario:</strong></td>
+                                <td id="totalInventoryValue" class="total-value">0.00 €</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                
+                <!-- Información sobre los productos -->
+                <div class="info-box">
+                    <p><strong>Total de productos:</strong> <span id="totalProducts">0</span></p>
+                    <p><strong>Artículos en stock:</strong> <span id="totalItems">0</span></p>
+                    <button id="clearAll" class="btn btn-danger">Eliminar Todos los Productos</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Ejercicio 5: IndexedDB - Administrador de productos del almacén</p>
+            <p class="version">Versión inicial con almacenamiento en memoria (sin IndexedDB)</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/Producto.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

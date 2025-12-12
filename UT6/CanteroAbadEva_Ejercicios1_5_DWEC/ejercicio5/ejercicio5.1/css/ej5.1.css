@@ -1,0 +1,65 @@
+/* Estilos para el campo de búsqueda */
+.search-input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="%237f8c8d" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
+.search-input:focus {
+    border-color: #6a11cb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+}
+
+/* Estilos para mensajes de estado */
+.mensaje-error {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    border-left: 4px solid #c62828;
+}
+
+.mensaje-info {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    border-left: 4px solid #1565c0;
+}
+
+/* Botón para estadísticas */
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+/* Responsividad para la tabla */
+@media (max-width: 768px) {
+    table {
+        font-size: 0.9rem;
+    }
+    
+    table th, table td {
+        padding: 0.5rem;
+    }
+    
+    .btn-action {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+}
