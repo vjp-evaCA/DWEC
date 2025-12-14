@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+    <link rel="stylesheet" href="css/ej5.css">
+</head>
+<body>
+    <h1>Administrador de Productos</h1>
+    
+    <div class="container">
+        <div class="productos">
+            <h2>Productos en el Almacén</h2>
+            <table id="tablaProductos">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unidad</th>
+                        <th>Marca</th>
+                    </tr>
+                </thead>
+                <tbody id="listaProductos">
+                </tbody>
+            </table>
+            <div id="mensajeVacio" class="vacio">No hay productos en el almacén</div>
+        </div>
+        
+        <div class="formulario">
+            <h2>Añadir Nuevo Producto</h2>
+            <form id="formProducto">
+                <div class="campo">
+                    <label>Nombre del producto:</label>
+                    <input type="text" id="item" required>
+                    <div id="errorItem" class="error"></div>
+                </div>
+                
+                <div class="campo">
+                    <label>Número de unidades:</label>
+                    <input type="number" id="cantidad" min="0" required>
+                    <div id="errorCantidad" class="error"></div>
+                </div>
+                
+                <div class="campo">
+                    <label>Precio por unidad (€):</label>
+                    <input type="number" id="precioUnidad" min="0" step="0.01" required>
+                    <div id="errorPrecio" class="error"></div>
+                </div>
+                
+                <div class="campo">
+                    <label>Marca del producto:</label>
+                    <input type="text" id="marca">
+                    <div id="errorMarca" class="error"></div>
+                </div>
+                
+                <button type="submit">Añadir Producto</button>
+                <div id="mensajeExito" class="exito"></div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/ej5.js"></script>
+</body>
+</html>
