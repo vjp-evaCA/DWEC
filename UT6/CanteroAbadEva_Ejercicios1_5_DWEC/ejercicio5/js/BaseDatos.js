@@ -1,22 +1,26 @@
-const nombreBD = 'ProductosDB';
+// Configuración de IndexedDB
+const nombreBD = 'ProductosTienda';
 const version = 1;
 const almacen = 'productos';
-let db = null;
+let db = null; 
 
+// Encapsula operaciones básicas sobre IndexedDB
 class BaseDatos {
+    // Abre la base de datos
     static abrir() {
         return new Promise((resolve, reject) => {
             const solicitud = indexedDB.open(nombreBD, version);
-            
+
             solicitud.onerror = () => {
                 reject('Error');
             };
-            
+
             solicitud.onsuccess = (e) => {
                 db = e.target.result;
                 resolve(db);
             };
-            
+
+            // Creación o actualización del almacén de objetos
             solicitud.onupgradeneeded = (e) => {
                 db = e.target.result;
                 if (!db.objectStoreNames.contains(almacen)) {
@@ -25,33 +29,35 @@ class BaseDatos {
             };
         });
     }
-    
+
+    // Devuelve todos los registros del almacén
     static obtenerTodos() {
         return new Promise((resolve, reject) => {
             const transaccion = db.transaction([almacen], 'readonly');
             const almacenObj = transaccion.objectStore(almacen);
             const solicitud = almacenObj.getAll();
-            
+
             solicitud.onerror = () => {
                 reject('Error');
             };
-            
+
             solicitud.onsuccess = (e) => {
                 resolve(e.target.result);
             };
         });
     }
-    
+
+    // Añade un producto al almacén (readwrite)
     static guardar(producto) {
         return new Promise((resolve, reject) => {
             const transaccion = db.transaction([almacen], 'readwrite');
             const almacenObj = transaccion.objectStore(almacen);
             const solicitud = almacenObj.add(producto);
-            
+
             solicitud.onerror = () => {
                 reject('Error');
             };
-            
+
             solicitud.onsuccess = (e) => {
                 resolve(e.target.result);
             };

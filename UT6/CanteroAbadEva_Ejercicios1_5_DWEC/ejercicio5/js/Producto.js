@@ -1,11 +1,15 @@
+// Representa un producto con propiedades básicas
 class Producto {
     constructor(item, cantidad, precioUnidad, marca) {
+        
+        // Valores por defecto y limpieza de strings
         this.item = item && item.trim() !== '' ? item.trim() : '-';
         this.cantidad = cantidad !== undefined && cantidad !== '' ? Number(cantidad) : 0;
         this.precioUnidad = precioUnidad !== undefined && precioUnidad !== '' ? Number(precioUnidad) : 0;
         this.marca = marca && marca.trim() !== '' ? marca.trim() : '-';
     }
     
+    // Crea una fila con celdas para mostrar el producto en la tabla
     static crearFila(producto) {
         const fila = document.createElement('tr');
         const celdaItem = document.createElement('td');

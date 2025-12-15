@@ -10,8 +10,10 @@
     <h1>Administrador de Productos</h1>
     
     <div class="container">
+        <!-- Sección de los productos almacenados -->
         <div class="productos">
             <h2>Productos en el Almacén</h2>
+            <!-- Tabla que muestra los productos -->
             <table id="tablaProductos">
                 <thead>
                     <tr>
@@ -24,9 +26,11 @@
                 <tbody id="listaProductos">
                 </tbody>
             </table>
+            <!-- Mensaje que se muestra cuando no hay productos -->
             <div id="mensajeVacio" class="vacio">No hay productos en el almacén</div>
         </div>
         
+        <!-- Sección del formulario para añadir un producto nuevo -->
         <div class="formulario">
             <h2>Añadir Nuevo Producto</h2>
             <form id="formProducto">
@@ -54,12 +58,14 @@
                     <div id="errorMarca" class="error"></div>
                 </div>
                 
+                <!-- Botón de envío y mensaje de éxito -->
                 <button type="submit">Añadir Producto</button>
                 <div id="mensajeExito" class="exito"></div>
             </form>
         </div>
     </div>
 
+    <!-- Script modular que gestiona la lógica del inventario -->
     <script type="module" src="js/ej5.js"></script>
 </body>
 </html>
