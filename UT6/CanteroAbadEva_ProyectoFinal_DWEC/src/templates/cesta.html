@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-Market - Carrito</title>
+</head>
+<body>
+    <header id="header"></header>
+    
+    <main>
+        <h1>Carrito de la Compra</h1>
+        
+        <section id="carrito">
+            <h2>Productos en tu carrito</h2>
+            <table id="tabla-carrito">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-tabla">
+                    <!-- Los productos del carrito aparecerán aquí -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">Total:</td>
+                        <td id="precio-total">0.00 €</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </main>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/cesta.js"></script>
+</body>
+</html>
