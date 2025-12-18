@@ -1,5 +1,7 @@
 // header.js - Gestiona el header en todas las páginas
-export function cargarHeader() {
+const { Carrito } = require('./Carrito.js');
+
+function cargarHeader() {
     const header = document.getElementById('header');
     if (!header) return;
     
@@ -17,12 +19,21 @@ export function cargarHeader() {
 }
 
 // Función para actualizar el contador del carrito
-export function actualizarContadorCarrito(cantidad) {
+function actualizarContadorCarrito(cantidad) {
     const enlaceCarrito = document.getElementById('enlace-carrito');
     if (enlaceCarrito) {
         enlaceCarrito.textContent = `Carrito (${cantidad})`;
     }
 }
 
-// Ejecutar cuando se cargue la página
-document.addEventListener('DOMContentLoaded', cargarHeader);
+// Actualizar contador al cargar cada página
+document.addEventListener('DOMContentLoaded', async () => {
+    cargarHeader();
+    try {
+        await Carrito.actualizarCabeceraCarrito();
+    } catch (error) {
+        console.error('Error al actualizar carrito:', error);
+    }
+});
+
+module.exports = { cargarHeader, actualizarContadorCarrito };

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini-Market - Electrónica</title>
+    <!-- NO pongas <link> aquí - webpack lo inyectará -->
 </head>
 <body>
     <header id="header"></header>
@@ -14,11 +15,12 @@
         
         <section id="productos-electronica">
             <h2>Productos de Electrónica</h2>
-            <div id="productos-container"></div>
+            <div id="productos-container">
+                <p>Cargando productos...</p>
+            </div>
         </section>
     </main>
 
-    <script src="../js/header.js"></script>
-    <script src="../js/electronica.js"></script>
+    <!-- NO pongas <script> aquí - webpack lo inyectará -->
 </body>
 </html>

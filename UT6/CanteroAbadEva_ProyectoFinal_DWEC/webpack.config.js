@@ -15,36 +15,49 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },
+  module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader']  // ← Esto ya lo tienes
+    }
+  ]
+},
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/templates/index.html',
       filename: 'index.html',
-      chunks: ['index']
+      chunks: ['index'],
+      inject: true
     }),
     new HtmlWebpackPlugin({
       template: './src/templates/electronica.html',
       filename: 'electronica.html',
-      chunks: ['electronica']
+      chunks: ['electronica'],
+      inject: true
     }),
     new HtmlWebpackPlugin({
       template: './src/templates/muebles.html',
       filename: 'muebles.html',
-      chunks: ['muebles']
+      chunks: ['muebles'],
+      inject: true
     }),
     new HtmlWebpackPlugin({
       template: './src/templates/decoracion.html',
       filename: 'decoracion.html',
-      chunks: ['decoracion']
+      chunks: ['decoracion'],
+      inject: true
     }),
     new HtmlWebpackPlugin({
       template: './src/templates/cesta.html',
       filename: 'cesta.html',
-      chunks: ['cesta']
+      chunks: ['cesta'],
+      inject: true
     })
   ],
   devServer: {
     static: './dist',
-    port: 8080,
+    port: 8081,
     open: true,
     hot: true
   }
