@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -11,19 +12,55 @@ module.exports = {
     cesta: './src/js/cesta.js'
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
-    clean: true
-  },
-  module: {
-  rules: [
-    {
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader']  // ← Esto ya lo tienes
-    }
-  ]
+  filename: '[name].js',
+  path: path.resolve(__dirname, 'dist'),
+  clean: true,
+  publicPath: 'auto'  
 },
+  module: {
+    rules: [
+      // REGLA PARA JAVASCRIPT (ES6 modules)
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      },
+      // REGLA PARA CSS (ya la tienes)
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      // REGLA PARA IMÁGENES
+      {
+        test: /\.(png|jpg|jpeg|gif|svg|webp|avif)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext]'
+        }
+      }
+    ]
+  },
+  // AÑADE esta configuración para manejar assets
+  experiments: {
+    asset: true  // Habilita asset modules
+  },
   plugins: [
+    new CopyWebpackPlugin({
+    patterns: [
+      {
+        from: 'src/images',  // Carpeta origen
+        to: 'images',        // Carpeta destino en dist/
+        globOptions: {
+          ignore: ['**/*.js', '**/*.css']  // Ignora archivos no-imagen
+        }
+      }
+    ]
+  }),
     new HtmlWebpackPlugin({
       template: './src/templates/index.html',
       filename: 'index.html',

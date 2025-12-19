@@ -1,31 +1,48 @@
-<!-- Debería tener algo como esto: -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini-Market</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Estilos básicos */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #34495e;
+            text-align: center;
+        }
+        
+        #products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Mini-Market</h1>
-    </header>
+    <h1>🛍️ Mini-Market</h1>
+    <p style="text-align: center; color: #7f8c8d;">
+        Todas las ofertas de los productos más interesantes...
+    </p>
     
-    <main>
-        <h2>Productos destacados</h2>
-        <div id="products-container">
-            <!-- Los productos se cargarán aquí -->
-        </div>
-    </main>
+    <h2>⭐ Productos Destacados</h2>
     
-    <!-- ESTO ES IMPORTANTE: -->
-    <!-- Si usas webpack, probablemente tengas: -->
-    <script src="dist/main.js"></script>
-    <!-- O -->
-    <script src="bundle.js"></script>
+    <!-- CONTENEDOR IMPORTANTE -->
+    <div id="products-container">
+        <!-- Los productos aparecerán aquí -->
+    </div>
     
-    <!-- Si NO usas webpack, deberías tener: -->
-    <script src="js/index.js"></script>
+    <!-- Webpack inyectará el JavaScript aquí -->
 </body>
 </html>

@@ -1,12 +1,9 @@
 // DatabaseCarrito.js - Gestiona IndexedDB para el carrito
-class DatabaseCarrito {
+export class DatabaseCarrito {
     static DB_NAME = 'MiniMarketCarritoDB';
     static DB_VERSION = 1;
     static STORE_NAME = 'carrito';
 
-    /**
-     * Abre la base de datos IndexedDB
-     */
     static openDatabase() {
         return new Promise((resolve, reject) => {
             const request = indexedDB.open(this.DB_NAME, this.DB_VERSION);
@@ -116,5 +113,3 @@ class DatabaseCarrito {
         });
     }
 }
-
-module.exports = { DatabaseCarrito };

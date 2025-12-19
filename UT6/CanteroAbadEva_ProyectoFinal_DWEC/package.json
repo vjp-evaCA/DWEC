@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "commonjs",
   "scripts": {
-    "start": "webpack serve --open",
-    "build": "webpack --mode production",
+    "lanzarRAM": "webpack serve --config webpack.config.js --port 8081 --open",
+    "build:prod": "webpack --mode production",
     "server": "json-server --watch db.json --port 3000"
   },
   "keywords": [],
@@ -16,7 +15,9 @@
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
     "babel-loader": "^10.0.0",
+    "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.1.2",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.6.5",
     "json-server": "^1.0.0-beta.3",
     "style-loader": "^4.0.0",

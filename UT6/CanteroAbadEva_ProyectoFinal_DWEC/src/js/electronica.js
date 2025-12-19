@@ -1,55 +1,52 @@
 // electronica.js - Página de electrónica
-const { cargarHeader } = require('./header.js');
-const { Producto } = require('./Producto.js');
-const { Carrito } = require('./Carrito.js');
-require('../css/styles.css');
+import { cargarHeader } from './header.js';  // ← Asegúrate que sea import
+import { Producto } from './Producto.js';
+import { Carrito } from './Carrito.js';
+import '../css/styles.css';
 
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('Cargando productos de electrónica...');
-    
+    cargarHeader('electronica');
     await cargarProductosElectronica();
-    
-    // Añadir eventos a los botones "Añadir al carrito"
-    document.addEventListener('click', async (event) => {
-        if (event.target.classList.contains('btn-añadir')) {
-            const productoDiv = event.target.closest('.producto-card');
-            if (productoDiv) {
-                const producto = {
-                    id: parseInt(productoDiv.dataset.id),
-                    titulo: productoDiv.dataset.titulo,
-                    precio: productoDiv.dataset.precio,
-                    foto: productoDiv.dataset.foto,
-                    descripcion: productoDiv.dataset.descripcion
-                };
-                
-                await Carrito.añadirProductoCarrito(producto);
-                alert(`${producto.titulo} añadido al carrito!`);
-            }
-        }
-    });
 });
 
 async function cargarProductosElectronica() {
     try {
         const response = await fetch('http://localhost:3000/electronica');
-        const productos = await response.json();
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         
-        const container = document.getElementById('productos-container');
-        if (!container) return;
+        const productos = await response.json();
+        console.log('Productos recibidos:', productos);
+        
+        const container = document.getElementById('products-container');
+        if (!container) {
+            console.error('No se encuentra #products-container');
+            return;
+        }
         
         container.innerHTML = '';
         
         productos.forEach(producto => {
-            const productoDiv = Producto.getDivFromProducto(producto);
-            container.appendChild(productoDiv);
+            const div = Producto.getDivFromProducto(producto);
+            
+            // Añadir evento al botón
+            const btn = div.querySelector('.btn-añadir');
+            if (btn) {
+                btn.addEventListener('click', async () => {
+                    const añadido = await Carrito.añadirProductoCarrito(producto);
+                    if (añadido) {
+                        alert(`${producto.titulo} añadido al carrito!`);
+                    }
+                });
+            }
+            
+            container.appendChild(div);
         });
-        
-        console.log(`${productos.length} productos cargados`);
     } catch (error) {
-        console.error('Error al cargar productos:', error);
-        const container = document.getElementById('productos-container');
+        console.error('Error al cargar productos de electrónica:', error);
+        const container = document.getElementById('products-container');
         if (container) {
-            container.innerHTML = '<p>Error al cargar los productos. Intenta más tarde.</p>';
+            container.innerHTML = '<p class="error">Error al cargar productos. Verifica que el servidor JSON esté corriendo en puerto 3000.</p>';
         }
     }
 }

@@ -1,14 +1,18 @@
 // muebles.js - Página de muebles
-const { cargarHeader } = require('./header.js');
-const { Producto } = require('./Producto.js');
-const { Carrito } = require('./Carrito.js');
-require('../css/styles.css');
+import { cargarHeader } from './header.js';  // ← CAMBIA require por import
+import { Producto } from './Producto.js';
+import { Carrito } from './Carrito.js';
+import '../css/styles.css';
 
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('Cargando productos de muebles...');
     
+    // ¡IMPORTANTE! Llama a cargarHeader
+    cargarHeader('muebles');
+    
     await cargarProductosMuebles();
     
+    // Añadir eventos a los botones "Añadir al carrito"
     document.addEventListener('click', async (event) => {
         if (event.target.classList.contains('btn-añadir')) {
             const productoDiv = event.target.closest('.producto-card');
@@ -33,7 +37,7 @@ async function cargarProductosMuebles() {
         const response = await fetch('http://localhost:3000/muebles');
         const productos = await response.json();
         
-        const container = document.getElementById('productos-container');
+        const container = document.getElementById('products-container');
         if (!container) return;
         
         container.innerHTML = '';
@@ -42,7 +46,13 @@ async function cargarProductosMuebles() {
             const productoDiv = Producto.getDivFromProducto(producto);
             container.appendChild(productoDiv);
         });
+        
+        console.log(`${productos.length} productos cargados`);
     } catch (error) {
         console.error('Error al cargar productos:', error);
+        const container = document.getElementById('products-container');
+        if (container) {
+            container.innerHTML = '<p>Error al cargar los productos. Intenta más tarde.</p>';
+        }
     }
 }

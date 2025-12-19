@@ -1,9 +1,13 @@
-// Carrito.js - Clase principal para gestionar el carrito
-const { DatabaseCarrito } = require('./DatabaseCarrito.js');
+import { DatabaseCarrito } from './DatabaseCarrito.js';
+import { Producto } from './Producto.js';
 
-class Carrito {
+export class Carrito {
+
     /**
-     * Añade un producto al carrito
+     * Abre la BD local, introduce el producto que viene del servidor directamente a la BD
+     * Si se inserta correctamente hace una llamada a "actualizarCabeceraCarrito".
+     * Finalmente cierra la BD.
+     * @param producto : El producto del servidor a insertar en IndexedDB
      */
     static async añadirProductoCarrito(producto) {
         try {
@@ -11,10 +15,7 @@ class Carrito {
             await DatabaseCarrito.insertProduct(db, producto);
             db.close();
             
-            // Actualizar el contador del header
             await Carrito.actualizarCabeceraCarrito();
-            
-            console.log(`Producto añadido: ${producto.titulo}`);
             return true;
         } catch (error) {
             console.error('Error al añadir producto:', error);
@@ -23,7 +24,9 @@ class Carrito {
     }
 
     /**
-     * Actualiza el contador del carrito en el header
+     * Abre la BD local, Extrae todos los productos. Saca la longitud de ese array de productos.
+     * Actualiza con el número de productos el texto del header del carrito.
+     * Cierra la BD.
      */
     static async actualizarCabeceraCarrito() {
         try {
@@ -31,8 +34,11 @@ class Carrito {
             const productos = await DatabaseCarrito.getAllProducts(db);
             db.close();
             
-            // Necesitamos la función actualizarContadorCarrito
-            // Se actualizará desde el header.js
+            const contadorCarrito = document.getElementById('textocesta');
+            if (contadorCarrito) {
+                contadorCarrito.textContent = `Cesta de la compra (${productos.length})`;
+            }
+            
             return productos.length;
         } catch (error) {
             console.error('Error al actualizar cabecera:', error);
@@ -41,24 +47,24 @@ class Carrito {
     }
 
     /**
-     * Elimina un producto del carrito
+     * Abre la BD local, elimina el producto referido por productoDB.
+     * ActualizarCabeceraCarrito. CalculaPrecioFinal. Cierra la BD.
+     * @param productoDB El producto de la base de datos que quieres eliminar.
+     * @param trProducto El div que representa al producto en la tabla del carrito (para eliminarlo)
      */
-    static async eliminarProductoCarrito(productoId, trProducto = null) {
+    static async eliminarProductoCarrito(productoDB, trProducto = null) {
         try {
             const db = await DatabaseCarrito.openDatabase();
-            await DatabaseCarrito.deleteProduct(db, productoId);
+            await DatabaseCarrito.deleteProduct(db, productoDB.id);
             db.close();
             
-            // Eliminar del DOM si se proporcionó el elemento
             if (trProducto) {
                 trProducto.remove();
             }
             
-            // Actualizar cabecera y precio total
             await Carrito.actualizarCabeceraCarrito();
             Carrito.calcularPrecioFinal();
             
-            console.log(`Producto eliminado: ID ${productoId}`);
             return true;
         } catch (error) {
             console.error('Error al eliminar producto:', error);
@@ -67,105 +73,63 @@ class Carrito {
     }
 
     /**
-     * Calcula el precio total de todos los productos en el carrito
+     * Elimina el tr de precio total.
+     * Recorre todos los tr de la tabla de productos, suma los precios.
+     * Añade la última fila de precio total con la suma calculada anteriormente.
      */
-    static async calcularPrecioFinal() {
-        try {
-            const db = await DatabaseCarrito.openDatabase();
-            const productos = await DatabaseCarrito.getAllProducts(db);
-            db.close();
-            
-            let total = 0;
-            productos.forEach(producto => {
-                total += parseFloat(producto.precio);
-            });
-            
-            // Actualizar el elemento en el DOM
-            const precioTotalElem = document.getElementById('precio-total');
-            if (precioTotalElem) {
-                precioTotalElem.textContent = `${total.toFixed(2)} €`;
-            }
-            
-            return total;
-        } catch (error) {
-            console.error('Error al calcular precio final:', error);
-            return 0;
+    static calcularPrecioFinal() {
+        const cuerpoTabla = document.getElementById('cuerpo-tabla');
+        if (!cuerpoTabla) return;
+
+        // Eliminar fila de precio total si existe
+        const filaTotalAnterior = document.getElementById('fila-total');
+        if (filaTotalAnterior) {
+            filaTotalAnterior.remove();
         }
+
+        // Sumar precios de todas las filas de productos
+        let total = 0;
+        const filasProductos = cuerpoTabla.querySelectorAll('tr');
+        filasProductos.forEach(fila => {
+            const precioCelda = fila.querySelector('td:nth-child(2)');
+            if (precioCelda) {
+                const precioTexto = precioCelda.textContent.replace(' €', '').trim();
+                total += parseFloat(precioTexto) || 0;
+            }
+        });
+
+        // Crear nueva fila de total
+        const filaTotal = document.createElement('tr');
+        filaTotal.id = 'fila-total';
+        filaTotal.innerHTML = `
+            <td colspan="2"><strong>Total</strong></td>
+            <td><strong id="precio-total">${total.toFixed(2)} €</strong></td>
+        `;
+        cuerpoTabla.appendChild(filaTotal);
     }
 
     /**
-     * Carga todos los productos del carrito en la tabla
+     * Carga los productos del carrito en la tabla (para cesta.js)
      */
     static async cargarProductosCarrito() {
         try {
             const db = await DatabaseCarrito.openDatabase();
-            const productos = await DatabaseCarrito.getAllProducts(db);
+            const productosBD = await DatabaseCarrito.getAllProducts(db);
             db.close();
-            
+
             const cuerpoTabla = document.getElementById('cuerpo-tabla');
             if (!cuerpoTabla) return;
-            
-            // Limpiar tabla
+
             cuerpoTabla.innerHTML = '';
-            
-            // Añadir cada producto
-            productos.forEach(producto => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>
-                        <img src="${producto.foto}" alt="${producto.titulo}" width="50">
-                        ${producto.titulo}
-                    </td>
-                    <td>${producto.precio} €</td>
-                    <td>
-                        <button class="btn-eliminar" data-id="${producto.id}">
-                            Eliminar
-                        </button>
-                    </td>
-                `;
-                
-                // Añadir evento al botón eliminar
-                const btnEliminar = tr.querySelector('.btn-eliminar');
-                btnEliminar.addEventListener('click', async () => {
-                    await Carrito.eliminarProductoCarrito(producto.id, tr);
-                });
-                
+
+            productosBD.forEach(productoBD => {
+                const tr = Producto.getTrFromProductoBD(productoBD);
                 cuerpoTabla.appendChild(tr);
             });
-            
-            // Calcular precio total
-            await Carrito.calcularPrecioFinal();
-            
+
+            Carrito.calcularPrecioFinal();
         } catch (error) {
             console.error('Error al cargar productos del carrito:', error);
         }
     }
-
-    /**
-     * Vacía completamente el carrito
-     */
-    static async vaciarCarrito() {
-        try {
-            const db = await DatabaseCarrito.openDatabase();
-            const transaction = db.transaction([DatabaseCarrito.STORE_NAME], 'readwrite');
-            const store = transaction.objectStore(DatabaseCarrito.STORE_NAME);
-            const request = store.clear();
-            
-            return new Promise((resolve, reject) => {
-                request.onerror = () => reject(request.error);
-                request.onsuccess = () => {
-                    db.close();
-                    if (document.getElementById('cuerpo-tabla')) {
-                        document.getElementById('cuerpo-tabla').innerHTML = '';
-                        Carrito.calcularPrecioFinal();
-                    }
-                    resolve();
-                };
-            });
-        } catch (error) {
-            console.error('Error al vaciar carrito:', error);
-        }
-    }
 }
-
-module.exports = { Carrito };

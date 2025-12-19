@@ -1,57 +1,50 @@
 {
   "electronica": [
     {
-      "id": 1,
-      "titulo": "Energy Sistem Frame Speaker Altavoz Bluetooth East Beach 50W",
-      "descripcion": "Potente altavoz tras un lienzo exclusivo con marco de madera, la combinación entre arte y música para integrarse con el resto de la decoración de tu casa. Sorpréndete con sus 50 W de potencia, tecnología Bluetooth 5.0, TWS y reproductor MP3 USB y microSD.",
+      "id": "1",
+      "titulo": "Samsung Galaxy A53 5G",
+      "descripcion": "Smartphone Samsung Galaxy A53 5G...",
       "precio": "133",
-      "foto": "https://thumb.pccomponentes.com/w-530-530/articles/21/218983/a2.jpg"
+      "foto": "tel1.jpg"
     },
     {
-      "id": 2,
-      "titulo": "Samsung UE85RLK0055 65 LED UltraHD 4K",
-      "descripcion": "Televisor Samsung 65 pulgadas con resolución 4K, tecnología LED y smart TV.",
+      "id": "2",
+      "titulo": "Televisor Samsung 4K 65\"",
+      "descripcion": "Televisor Samsung 65 pulgadas 4K UHD...",
       "precio": "660.50",
-      "foto": "https://thumb.pccomponentes.com/w-530-530/articles/35/359456/1.jpg"
-    },
-    {
-      "id": 3,
-      "titulo": "iPhone 14 Pro",
-      "descripcion": "Smartphone Apple iPhone 14 Pro con pantalla Super Retina XDR y cámara de 48MP.",
-      "precio": "999",
-      "foto": "https://thumb.pccomponentes.com/w-530-530/articles/34/349123/1.jpg"
+      "foto": "tel2.jpg"
     }
   ],
   "muebles": [
     {
-      "id": 1,
+      "id": "3",
       "titulo": "Silla de Oficina Ergonómica",
-      "descripcion": "Silla ergonómica para oficina con soporte lumbar ajustable y reposabrazos.",
+      "descripcion": "Silla ergonómica ejecutiva...",
       "precio": "89.99",
-      "foto": "https://thumb.pccomponentes.com/w-530-530/articles/27/279456/silla-oficina.jpg"
+      "foto": "lam1.jpg"  
     },
     {
-      "id": 2,
-      "titulo": "Escritorio de Madera",
-      "descripcion": "Escritorio amplio de madera maciza, ideal para trabajar desde casa.",
-      "precio": "120.50",
-      "foto": "https://thumb.pccomponentes.com/w-530-530/articles/28/289123/escritorio-madera.jpg"
+      "id": "4",
+      "titulo": "Escritorio de Madera Moderno",
+      "descripcion": "Escritorio de oficina...",
+      "precio": "120.00",
+      "foto": "mesa1.jpg"  
     }
   ],
   "decoracion": [
     {
-      "id": 1,
-      "titulo": "Lámpara de Pie Moderna",
-      "descripcion": "Lámpara de pie con diseño moderno y luz LED regulable.",
-      "precio": "45.99",
-      "foto": "https://thumb.pccomponentes.com/w-530-530/articles/29/299456/lampara-pie.jpg"
+      "id": "5",
+      "titulo": "Lámpara de Pie Minimalista",
+      "descripcion": "Lámpara de pie con diseño escandinavo...",
+      "precio": "45.50",
+      "foto": "dec1.jpg"  
     },
     {
-      "id": 2,
-      "titulo": "Cuadro Abstracto",
-      "descripcion": "Cuadro abstracto con marco de madera para decoración de interiores.",
-      "precio": "35.75",
-      "foto": "https://thumb.pccomponentes.com/w-530-530/articles/30/309123/cuadro-abstracto.jpg"
+      "id": "6",
+      "titulo": "Cuadro Abstracto Contemporáneo",
+      "descripcion": "Cuadro decorativo...",
+      "precio": "29.99",
+      "foto": "dec2.jpg"  
     }
   ]
 }
